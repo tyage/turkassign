@@ -1,4 +1,4 @@
-import MTurk from './mturk';
+import MTurk from './mturk/mturk';
 import taskPooler from './taskPooler';
 
 export default {

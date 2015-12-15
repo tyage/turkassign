@@ -1,6 +1,6 @@
 import https from 'https';
 import crypto from 'crypto';
-import { loadXML } from './mturk-parser';
+import { loadXML } from './parser';
 
 const generateHmac = (data, key) => {
   return crypto.createHmac('sha1', key).update(data).digest('base64');
@@ -31,7 +31,7 @@ const apiEndpoint = 'mechanicalturk.sandbox.amazonaws.com';
 const apiVersion = '2014-08-15';
 const apiService = 'AWSMechanicalTurkRequester';
 
-class MTurk {
+class API {
   constructor(apiParams) {
     if (!apiParams.awsAccessKeyId || !apiParams.awsSecretAccessKey) {
       console.error('set awsAccessKeyId and awsSecretAccessKey');
@@ -87,15 +87,6 @@ class MTurk {
       AssignmentId: assignmentId
     }, params));
   }
-
-  generateQuestionXML(content, frameHeight = 450) {
-    return `
-<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
-  <HTMLContent><![CDATA[ ${content} ]]></HTMLContent>
-  <FrameHeight>${frameHeight}</FrameHeight>
-</HTMLQuestion>
-`
-  }
 };
 
-export default MTurk;
+export default API;
