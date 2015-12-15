@@ -1,6 +1,6 @@
 import Config from '../config';
 
-const defaultQuestion = () => {
+const defaultQuestion = (taskSetId) => {
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,10 @@ const defaultQuestion = () => {
 </head>
 <body>
   <div id="content"></div>
-  <script>window.taskPoolerAddress = "${Config.get('taskPoolerAddress')}";</script>
+  <script>
+    window.taskPoolerAddress = "${Config.get('taskPoolerAddress')}";
+    window.taskSetId = "${taskSetId}";
+  </script>
   <script src="${Config.get('taskPoolerAddress')}/static/js/app.js"></script>
 </body>
 </html>
