@@ -1,34 +1,39 @@
-import Config from './config';
 import crypto from 'crypto';
-import fetch from 'node-fetch';
 import { loadXML } from './mturk-parser';
 
 const generateHmac = (data, key) => {
   return crypto.createHmac('sha1', key).update(data).digest('base64');
 };
 
+const apiEndpoint = 'https://mechanicalturk.sandbox.amazonaws.com';
+const apiVersion = '2014-08-15';
+const apiService = 'AWSMechanicalTurkRequester';
+
 class MTurk {
-  constructor(awsAccessKeyId, awsSecretAccessKey) {
+  constructor(apiParams) {
     if (!awsAccessKeyId || !awsSecretAccessKey) {
       console.error('set awsAccessKeyId and awsSecretAccessKey');
     }
 
-    this.awsAccessKeyId = awsAccessKeyId;
-    this.awsSecretAccessKey = awsSecretAccessKey;
+    this.api = Object.assign({
+      endpoint: apiEndpoint,
+      version: apiVersion,
+      serviceName: apiService
+    }, apiParams);
   }
 
   request(params) {
     params = Object.assign({
-      Service: 'AWSMechanicalTurkRequester',
-      AWSAccessKeyId: this.awsAccessKeyId,
-      Version: '2014-08-15',
+      Service: this.api.serviceName,
+      AWSAccessKeyId: this.api.awsAccessKeyId,
+      Version: this.api.version,
       Timestamp: (new Date()).toISOString()
     }, params);
     params.Signature = generateHmac(`${params.Service}${params.Operation}${params.Timestamp}`,
-      this.awsSecretAccessKey);
+      this.api.awsSecretAccessKey);
     const param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
 
-    return fetch(`${Config.get('apiEndpoint')}/?${param}`, {})
+    return fetch(`${this.api.endpoint}/?${param}`, {})
       .then(res => res.text())
       .then(text => {
         console.log(text); // TODO: use general logger
