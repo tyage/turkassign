@@ -6,7 +6,8 @@ class MTurk {
     this.api = new API(apiParams);
   }
 
-  createHIT(taskSetId, apiParams = {}) {
+  createHIT(algorithm, taskSetId, apiParams = {}) {
+    // TODO: inject a algorithm in question page(worker process the algorithm)
     const params = Object.assign({
       Question: generateQuestionXML(defaultQuestion(taskSetId)),
       MaxAssignments: 1,
