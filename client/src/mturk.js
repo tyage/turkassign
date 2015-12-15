@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import fetch from 'node-fetch';
 import { loadXML } from './mturk-parser';
 
-let generateHmac = (data, key) => {
+const generateHmac = (data, key) => {
   return crypto.createHmac('sha1', key).update(data).digest('base64');
 };
 
@@ -26,7 +26,7 @@ class MTurk {
     }, params);
     params.Signature = generateHmac(`${params.Service}${params.Operation}${params.Timestamp}`,
       this.awsSecretAccessKey);
-    let param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
+    const param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
 
     return fetch(`${Config.get('apiEndpoint')}/?${param}`, {})
       .then(res => res.text())
