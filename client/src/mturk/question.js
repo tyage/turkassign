@@ -1,4 +1,4 @@
-import Config from './config';
+import Config from '../config';
 
 const defaultQuestion = () => {
   return `
@@ -7,12 +7,12 @@ const defaultQuestion = () => {
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" href="${Config.get('workerProxyServer')}/static/css/app.css" />
+  <link rel="stylesheet" href="${Config.get('taskPoolerAddress')}/static/css/app.css" />
 </head>
 <body>
   <div id="content"></div>
-  <script>window.requesterProxyServer = "${Config.get('workerProxyServer')}";</script>
-  <script src="${Config.get('workerProxyServer')}/static/js/app.js"></script>
+  <script>window.taskPoolerAddress = "${Config.get('taskPoolerAddress')}";</script>
+  <script src="${Config.get('taskPoolerAddress')}/static/js/app.js"></script>
 </body>
 </html>
 `;
