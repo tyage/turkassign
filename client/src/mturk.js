@@ -11,7 +11,7 @@ const apiService = 'AWSMechanicalTurkRequester';
 
 class MTurk {
   constructor(apiParams) {
-    if (!awsAccessKeyId || !awsSecretAccessKey) {
+    if (!apiParams.awsAccessKeyId || !apiParams.awsSecretAccessKey) {
       console.error('set awsAccessKeyId and awsSecretAccessKey');
     }
 
