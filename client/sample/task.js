@@ -1,10 +1,15 @@
-import { taskPooler, mturk } from '../lib/main';
+import { taskPooler, MTurk } from '../lib/main';
 
 // set the tasks to task pooler
-const tasks = {};
+const tasks = [];
 const taskSetId = taskPooler.setTasks(tasks);
 
 // create a HIT with algorithm and taskSetId
+const mturk = new MTurk({
+  awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
+
 const algorithm = (worker, taskSet) => {
   // worker assigned a task which is choosed by algorithm
   // e.g. 乱択アルゴリズム
