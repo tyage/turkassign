@@ -30,4 +30,4 @@ const generateQuestionXML = (content, frameHeight = 450) => {
 `
 };
 
-export default { defaultQuestion, generateQuestionXML };
+export { defaultQuestion, generateQuestionXML };
