@@ -1,3 +1,5 @@
+import taskTemplate from './task-template';
+
 // worker assigned a task which is choosed by random
 //
 // worker: {
@@ -17,4 +19,4 @@ const taskId = parseInt(Math.random() * taskSet.length);
 const selectedTask = taskSet[taskId];
 selectedTask.reserve();
 
-document.getElementById('content').innerHTML = selectedTask.data.html;
+document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);

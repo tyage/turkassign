@@ -1,8 +1,8 @@
 import fs from 'fs';
 import { taskPooler, MTurk } from '../src/main';
+import tasks from './tasks';
 
 // set the tasks to task pooler
-const tasks = [];
 const taskSetId = taskPooler.setTasks(tasks);
 
 // create a HIT with algorithm and taskSetId
