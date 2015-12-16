@@ -2,9 +2,9 @@
   "name": "task-pooler-client-sample",
   "version": "1.0.0",
   "description": "",
-  "main": "task.js",
+  "main": "main.js",
   "scripts": {
-    "start": "npm build && `npm bin`/babel-node task.js",
+    "start": "npm build && `npm bin`/babel-node main.js",
     "build": "`npm bin`/babel assignment-src --out-dir assignment-dist --source-maps inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
