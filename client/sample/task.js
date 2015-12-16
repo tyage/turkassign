@@ -1,4 +1,4 @@
-import fs from fs;
+import fs from 'fs';
 import { taskPooler, MTurk } from '../lib/main';
 
 // set the tasks to task pooler
@@ -11,7 +11,7 @@ const mturk = new MTurk({
   awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-const algorithm = fs.readFileSync('./random.js');
+const algorithm = fs.readFileSync('./assignment-dist/random.js');
 const budget = 0.06;
 const hitCost = 0.02;
 for (let i = 0; i < budget / hitCost; ++i) {

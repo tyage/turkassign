@@ -4,6 +4,7 @@
   "description": "",
   "main": "task.js",
   "scripts": {
+    "start": "npm build && `npm bin`/babel-node task.js",
     "build": "`npm bin`/babel assignment-src --out-dir assignment-dist --source-maps inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
