@@ -1,10 +1,10 @@
 {
-  "name": "task-pooler-client",
+  "name": "task-pooler-client-sample",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/main.js",
+  "main": "task.js",
   "scripts": {
-    "build": "`npm bin`/babel src --out-dir lib --source-maps inline",
+    "build": "`npm bin`/babel assignment-src --out-dir assignment-dist --source-maps inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,8 +12,5 @@
   "devDependencies": {
     "babel-cli": "^6.3.17",
     "babel-preset-es2015": "^6.3.13"
-  },
-  "dependencies": {
-    "crypto": "0.0.3"
   }
 }
