@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { taskPooler, MTurk } from '../lib/main';
+import { taskPooler, MTurk } from '../src/main';
 
 // set the tasks to task pooler
 const tasks = [];
