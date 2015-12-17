@@ -18,6 +18,11 @@ const budget = 0.02;
 const hitCost = 0.02;
 for (let i = 0; i < budget / hitCost; ++i) {
   mturk.createHIT(algorithm, taskSetId, {
-    'Reward.1.Amount': hitCost
+    'Title': 'Estimate age of the photo',
+    'Description': 'We will show you some photos. You should estimate the age of person who is in the photo.',
+    'AssignmentDurationInSeconds': 30,
+    'LifetimeInSeconds': 3600,
+    'Reward.1.Amount': hitCost,
+    'Reward.1.CurrencyCode': 'USD'
   });
 }
