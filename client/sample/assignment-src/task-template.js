@@ -16,7 +16,7 @@ const taskTemplate = (images) => `
 </div>
 <div>
   <form>
-    ${ _.each(images, (image) => imageTemplate(image)).join('') }
+    ${ _.map(images, (image) => imageTemplate(image)).join('') }
 
     <input type="submit">
   </form>
