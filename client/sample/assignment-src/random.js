@@ -20,5 +20,5 @@ fetchTaskSet().then(taskSet => {
   const selectedTask = taskSet[taskId];
   selectedTask.reserve();
 
-  document.getElementById('content').innerHTML = taskTemplate([selectedTask.data.image]);
+  document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);
 });
