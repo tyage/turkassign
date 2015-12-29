@@ -3,13 +3,7 @@ import _ from 'lodash';
 const imageTemplate = (image) => `
 <div>
   <img src="${image.url}">
-  <input type="radio" name="result.${image.id}"> 1-9
-  <input type="radio" name="result.${image.id}"> 10-19
-  <input type="radio" name="result.${image.id}"> 20-29
-  <input type="radio" name="result.${image.id}"> 30-39
-  <input type="radio" name="result.${image.id}"> 40-49
-  <input type="radio" name="result.${image.id}"> 50-59
-  <input type="radio" name="result.${image.id}"> 60-
+  <input type="text" name="result.${image.id}">
 </div>
 `;
 
