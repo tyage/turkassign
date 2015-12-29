@@ -11,7 +11,7 @@ const server = http.Server(app);
 
 server.listen(process.env.PORT || 80);
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/static', express.static('public/dist'));
 app.use('/algorithm', express.static('algorithm'));
 app.use(function(req, res, next) {
