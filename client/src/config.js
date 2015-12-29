@@ -1,7 +1,7 @@
 let config = new Map();
 
 const defaultConfig = {
-  taskPoolerAddress: 'https://mocos.kitchen' // call workerProxyServer.reconnect after change this
+  taskPoolerAddress: 'https://task.mocos.kitchen' // call workerProxyServer.reconnect after change this
 };
 for (let key in defaultConfig) {
   if (config.get(key) === undefined) {
