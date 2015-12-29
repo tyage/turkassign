@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import uuid from 'node-uuid';
 import multer from 'multer';
 
-const mult = multer({ dest: './algorithm/' });
+const mult = multer({ dest: './uploads/' });
 
 const app = express();
 const server = http.Server(app);
@@ -13,7 +13,6 @@ server.listen(process.env.PORT || 80);
 
 app.use(bodyParser.json());
 app.use('/static', express.static('public/dist'));
-app.use('/algorithm', express.static('public/algorithm'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -21,6 +20,7 @@ app.use(function(req, res, next) {
 });
 
 const taskSets = [];
+const taskAlgorithms = {};
 
 const formOnSet = mult.fields([
   { name: 'taskSet' },
@@ -34,14 +34,22 @@ app.put('/set', formOnSet, (req, res) => {
   console.log(`taskSet ${id} was set`);
   console.log(taskSet);
 
-  const algorithm = req.body.algorithm;
+  const algorithm = req.file.algorithm;
   if (algorithm) {
-    fs.writeFileSync(`./algorithm/${id}.js`, algorithm);
+    taskAlgorithms[id] = algorithm.path;
   }
 
   res.json({
     id
   });
+});
+
+app.get('/algorithm/:id.js', (req, res) => {
+  const id = req.params.id;
+  const content = fs.readFileSync(taskAlgorithms[id]);
+
+  res.type('text/javascript');
+  res.send(content);
 });
 
 app.post('/reserve', (req, res) => {
