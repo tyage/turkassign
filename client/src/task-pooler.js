@@ -6,7 +6,10 @@ class TaskPooler {
     const taskPoolerAddress = config.get('taskPoolerAddress');
     return fetch(`${taskPoolerAddress}/set`, {
       method: 'PUT',
-      body: JSON.stringify(tasks)
+      body: JSON.stringify(tasks),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then(res => {
       return res.json();
     });
