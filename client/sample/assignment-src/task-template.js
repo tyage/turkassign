@@ -15,10 +15,12 @@ const taskTemplate = (images) => `
   </ul>
 </div>
 <div>
-  <form>
+  <form name="mturk_form" id="mturk_form">
+    <input type="hidden" name="assignmentId" id="assignmentId">
+
     ${ _.map(images, (image) => imageTemplate(image)).join('') }
 
-    <input type="submit">
+    <input type="submit" id="submitButton">
   </form>
 </div>
 `;
