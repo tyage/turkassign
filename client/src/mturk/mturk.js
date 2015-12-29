@@ -6,9 +6,9 @@ class MTurk {
     this.api = new API(apiParams);
   }
 
-  createHIT(algorithm, taskSetId, apiParams = {}) {
+  createHIT(taskSetId, apiParams = {}) {
     const params = Object.assign({
-      Question: generateQuestionXML(defaultQuestion(algorithm, taskSetId)),
+      Question: generateQuestionXML(defaultQuestion(taskSetId)),
       MaxAssignments: 1,
       Title: 'sample HIT ' + new Date(), // XXX: this is sample
       Description: 'sample desc', // XXX: this is sample

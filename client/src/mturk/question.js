@@ -14,11 +14,9 @@ const defaultQuestion = (algorithm, taskSetId) => {
   <script>
 window.taskPoolerAddress = "${Config.get('taskPoolerAddress')}";
 window.taskSetId = "${taskSetId}";
-window.assignTask = function(worker, fetchTaskSet) {
-${algorithm}
-};
   </script>
   <script src="${Config.get('taskPoolerAddress')}/static/js/app.js"></script>
+  <script src="${Config.get('taskPoolerAddress')}/algorithm/${taskSetId}.js"></script>
 </body>
 </html>
 `;
