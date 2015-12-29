@@ -17,8 +17,10 @@ import taskTemplate from './task-template';
 
 // TODO: taskSetは後からでも取ってこれるようにしたほうがいい(同一ワーカーのexploitation結果を用いてタスクを割り当てる場合に使えるから)
 
-const taskId = parseInt(Math.random() * taskSet.length);
-const selectedTask = taskSet[taskId];
-selectedTask.reserve();
+fetchTaskSet().then(taskSet => {
+  const taskId = parseInt(Math.random() * taskSet.length);
+  const selectedTask = taskSet[taskId];
+  selectedTask.reserve();
 
-document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);
+  document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);
+});
