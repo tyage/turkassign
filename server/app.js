@@ -46,7 +46,7 @@ app.put('/set', formOnSet, (req, res) => {
 });
 
 app.post('/reserve', (req, res) => {
-  const { taskSetId, index } = req.params;
+  const { taskSetId, index } = req.body;
   const task = taskSets[taskSetId][index];
 
   if (task.budget <= 0) {
@@ -64,7 +64,7 @@ app.post('/reserve', (req, res) => {
 });
 
 app.post('/unreserve', (req, res) => {
-  const { taskSetId, index } = req.params;
+  const { taskSetId, index } = req.body;
   const task = taskSets[taskSetId][index];
 
   ++task.budget;
