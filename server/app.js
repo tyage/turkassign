@@ -6,7 +6,6 @@ import multer from 'multer';
 import fs from 'fs';
 
 const mult = multer({ dest: './uploads/' });
-
 const app = express();
 const server = http.Server(app);
 
@@ -14,6 +13,7 @@ server.listen(process.env.PORT || 80);
 
 app.use(bodyParser.json());
 app.use('/static', express.static('public/dist'));
+app.use('/algorithm', express.static('algorithm'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -21,7 +21,6 @@ app.use(function(req, res, next) {
 });
 
 const taskSets = [];
-const taskAlgorithms = {};
 
 const formOnSet = mult.fields([
   { name: 'taskSet' },
@@ -37,25 +36,13 @@ app.put('/set', formOnSet, (req, res) => {
 
   const algorithm = req.files.algorithm;
   if (algorithm) {
-    taskAlgorithms[id] = algorithm[0].path;
+    const path = algorithm[0].path;
+    fs.rename(path, `./algorithm/${id}.js`);
   }
 
   res.json({
     id
   });
-});
-
-app.get('/algorithm/:id.js', (req, res) => {
-  const id = req.params.id;
-  const path = taskAlgorithms[id];
-  if (!path) {
-    return res.status(404).end();
-  }
-
-  const content = fs.readFileSync(path);
-
-  res.type('text/javascript');
-  res.send(content);
 });
 
 app.post('/reserve', (req, res) => {
