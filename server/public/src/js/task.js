@@ -9,6 +9,7 @@ export default class Task {
   reserve() {
     return $.ajax({
       url: `${taskPoolerAddress}/reserve`,
+      method: 'POST',
       data: {
         taskSetId,
         index: this.index
@@ -18,6 +19,7 @@ export default class Task {
   unreserve() {
     return $.ajax({
       url: `${taskPoolerAddress}/unreserve`,
+      method: 'POST',
       data: {
         taskSetId,
         index: this.index
