@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default class Task {
   constructor(data, index) {
     this.data = data;
