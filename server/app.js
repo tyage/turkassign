@@ -30,7 +30,7 @@ app.put('/set', formOnSet, (req, res) => {
   const id = uuid();
 
   const taskSet = req.body.taskSet;
-  taskSets[id] = taskSet;
+  taskSets[id] = JSON.parse(taskSet);
   console.log(`taskSet ${id} was set`);
   console.log(taskSet);
 
