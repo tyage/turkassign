@@ -2,11 +2,24 @@ import fetch from 'node-fetch';
 import config from './config';
 
 class TaskPooler {
+  getEndpoint() {
+    reuturn config.get('taskPoolerAddress');
+  }
   setTasks(tasks) {
-    const taskPoolerAddress = config.get('taskPoolerAddress');
-    return fetch(`${taskPoolerAddress}/set`, {
+    return fetch(`${this.getEndpoint()}/set`, {
       method: 'PUT',
       body: JSON.stringify(tasks),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      return res.json();
+    });
+  }
+  upload(content) {
+    return fetch(`${this.getEndpoint()}/upload`, {
+      method: 'PUT',
+      body: JSON.stringify({ content }),
       headers: {
         'Content-Type': 'application/json'
       }
