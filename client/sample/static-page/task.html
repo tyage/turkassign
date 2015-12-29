@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+.document {
+  border-left: 5px solid #1b809e;
+  border-radius: 3px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+.document h3 {
+  color: #1b809e;
+  margin: 0 0 5px 0;
+}
+.photo {
+  display: inline-block;
+  margin: 10px;
+}
+.photo .caption {
+  text-align: center;
+}
+  </style>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body class="container">
+  <h2>Estimate the age of human in the photo(10 - 25 photos)</h2>
+
+  <div class="document">
+    <h3>Detail of each image task:</h3>
+    <ul>
+      <li>Please estimate the age of the person who is in the photo.</li>
+      <li>Input the age of the person in textbox.</li>
+      <li>
+        <span>Example:</span>
+        <div class="photos row">
+          <div class="photo thumbnail col-md-3">
+            <img src="/Volumes/32GB/CACD/CACD2000/62_Robin_Williams_0013.jpg">
+            <div class="caption">
+              <input type="number" placeholder="input the age" value="63" disabled>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="document">
+    <h3>Detail whole tasks and reward:</h3>
+    <ul>
+      <li>
+        <span>If you are first time to do this task:</span>
+        <ul>
+          <li>There are two stages to complete the tasks totally.</li>
+          <li>In the first stage, please do 15 tasks(images).</li>
+          <li>After you done 15 tasks, submit the result.</li>
+          <li>Then, in the second stage, following 10 tasks are shown.</li>
+          <li>After you done following 10 tasks, submit the result.</li>
+        </ul>
+      </li>
+      <li>
+        <span>If you have done this task in the past:</span>
+        <ul>
+          <li>You can pass the first 15 tasks and only 10 tasks are shown to you.</li>
+          <li>After you done 10 tasks, submit the result.</li>
+        </ul>
+      </li>
+      <li>Reward is the same($0.05) whether you done 25 tasks or 10 tasks</li>
+      <li>So first time you will earn $0.05 by solving 25 tasks, but from the second time you will earn $0.05 by solving 10 tasks.</li>
+    </ul>
+  </div>
+
+  <form>
+    <div class="photos row">
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Robin_Williams_0013.jpg">
+        <div class="caption">
+          <input type="number" name="result.1" placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Kurt_Russell_0010.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Anjelica_Huston_0012.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/56_Michael_Keaton_0016.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Mark_Harmon_0013.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Margo_Martindale_0008.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_William_Katt_0014.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Lou_Ferrigno_0014.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Chris_Cooper_0015.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Robert_Davi_0012.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Jamey_Sheridan_0013.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Bill_Moseley_0016.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Timothy_Bottoms_0010.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+      <div class="photo thumbnail col-md-3">
+        <img src="/Volumes/32GB/CACD/CACD2000/62_Cheryl_Ladd_0017.jpg">
+        <div class="caption">
+          <input type="number" name="result." placeholder="input the age">
+        </div>
+      </div>
+    </div>
+
+    <input type="submit">
+  </form>
+
+</body>
+</html>
