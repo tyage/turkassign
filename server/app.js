@@ -1,11 +1,13 @@
 import express from 'express';
 import http from 'http';
+import bodyParser from 'body-parser';
 
 const app = express();
 const server = http.Server(app);
 
 server.listen(process.env.PORT || 80);
 
+app.use(bodyParser.json());
 app.use('/static', express.static('public/dist'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
