@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "npm build && `npm bin`/babel-node main.js",
+    "start": "npm run build && `npm bin`/babel-node main.js",
     "build": "`npm bin`/gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
