@@ -23,8 +23,8 @@ app.use(function(req, res, next) {
 const taskSets = [];
 
 const setUpload = upload.fields([
-  { name, 'taskSet' },
-  { name, 'algorithm' },
+  { name: 'taskSet' },
+  { name: 'algorithm' },
 ]);
 app.put('/set', (req, res) => {
   const id = uuid();
