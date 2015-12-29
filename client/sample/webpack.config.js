@@ -1,7 +1,7 @@
 module.exports = {
   entry: './assignment-src/random.js',
   output: {
-    filename: './assignment-src/random.js'
+    filename: './assignment-dist/random.js'
   },
   devtool: 'inline-source-map',
   module: {

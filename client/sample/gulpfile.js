@@ -21,8 +21,7 @@ gulp.task('js', function() {
 
 gulp.task('watch', function() {
   gulp.watch(config.src + '/js/**', ['js']);
-  gulp.watch(config.src + '/css/**', ['css']);
 });
 
-gulp.task('default', ['js', 'css'], function() {
+gulp.task('default', ['js'], function() {
 });
