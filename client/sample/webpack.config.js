@@ -3,7 +3,6 @@ module.exports = {
   output: {
     filename: './assignment-dist/random.js'
   },
-  devtool: 'inline-source-map',
   module: {
     loaders: [
       {
