@@ -5,21 +5,13 @@ class TaskPooler {
   getEndpoint() {
     reuturn config.get('taskPoolerAddress');
   }
-  setTasks(tasks) {
+  setTasksAndAlgorithm(taskSet, algorithm) {
     return fetch(`${this.getEndpoint()}/set`, {
       method: 'PUT',
-      body: JSON.stringify(tasks),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      return res.json();
-    });
-  }
-  upload(content) {
-    return fetch(`${this.getEndpoint()}/upload`, {
-      method: 'PUT',
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({
+        taskSet,
+        algorithm
+      }),
       headers: {
         'Content-Type': 'application/json'
       }

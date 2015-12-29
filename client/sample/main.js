@@ -2,8 +2,11 @@ import fs from 'fs';
 import { taskPooler, MTurk } from '../src/main';
 import tasks from './tasks';
 
+// assignment algorithm should be compiled because it will be run by worker's browser
+const algorithm = fs.readFileSync('./assignment-dist/random.js');
+
 // set the tasks to task pooler
-taskPooler.setTasks(tasks).then(res => {
+taskPooler.setTasksAndAlgorithm(tasks, algorithm).then(res => {
   const taskSetId = res.id;
 
   // create a HIT with algorithm and taskSetId
@@ -12,13 +15,10 @@ taskPooler.setTasks(tasks).then(res => {
     awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   });
 
-  // assignment algorithm should be compiled because it will be run by worker's browser
-  const algorithm = fs.readFileSync('./assignment-dist/random.js');
-
   const budget = 0.02;
   const hitCost = 0.02;
   for (let i = 0; i < budget / hitCost; ++i) {
-    mturk.createHIT(algorithm, taskSetId, {
+    mturk.createHIT(taskSetId, {
       'Title': 'Estimate age of the photo',
       'Description': 'We will show you some photos. You should estimate the age of person who is in the photo.',
       'AssignmentDurationInSeconds': 30,

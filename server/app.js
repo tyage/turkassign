@@ -10,6 +10,7 @@ server.listen(process.env.PORT || 80);
 
 app.use(bodyParser.json());
 app.use('/static', express.static('public/dist'));
+app.use('/algorithm', express.static('public/algorithm'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -20,11 +21,16 @@ const taskSets = [];
 
 app.put('/set', (req, res) => {
   const id = uuid();
-  const taskSet = req.body;
-  taskSets[id] = taskSet;
 
+  const taskSet = req.body.taskSet;
+  taskSets[id] = taskSet;
   console.log(`taskSet ${id} was set`);
   console.log(taskSet);
+
+  const algorithm = req.body.algorithm;
+  if (algorithm) {
+    fs.writeFileSync(`./algorithm/${id}.js`, algorithm);
+  }
 
   res.json({
     id
