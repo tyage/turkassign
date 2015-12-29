@@ -3,6 +3,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import uuid from 'node-uuid';
 import multer from 'multer';
+import fs from 'fs';
 
 const mult = multer({ dest: './uploads/' });
 
