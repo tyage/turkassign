@@ -12,13 +12,18 @@ const defaultQuestion = (taskSetId) => {
 </head>
 <body>
   <div id="content"></div>
+
   <script>
 window.taskPoolerAddress = "${taskPoolerAddress}";
 window.taskSetId = "${taskSetId}";
   </script>
   <script src="${taskPoolerAddress}/static/js/app.js"></script>
   <script src="${taskPoolerAddress}/algorithm/${taskSetId}.js"></script>
+
   <script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
+  <script>
+turkSetAssignmentID();
+  </script>
 </body>
 </html>
 `;
