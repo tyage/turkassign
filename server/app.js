@@ -37,7 +37,7 @@ app.put('/set', formOnSet, (req, res) => {
 
   const algorithm = req.files.algorithm;
   if (algorithm) {
-    taskAlgorithms[id] = algorithm.path;
+    taskAlgorithms[id] = algorithm[0].path;
   }
 
   res.json({
