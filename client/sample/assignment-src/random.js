@@ -15,8 +15,6 @@ import taskTemplate from './task-template';
 //   }
 // ]
 
-// TODO: taskSetは後からでも取ってこれるようにしたほうがいい(同一ワーカーのexploitation結果を用いてタスクを割り当てる場合に使えるから)
-
 fetchTaskSet().then(taskSet => {
   const taskId = parseInt(Math.random() * taskSet.length);
   const selectedTask = taskSet[taskId];
