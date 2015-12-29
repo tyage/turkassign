@@ -3,7 +3,7 @@ import { taskPooler, MTurk } from '../src/main';
 import tasks from './tasks';
 
 // assignment algorithm should be compiled because it will be run by worker's browser
-const algorithm = fs.readFileSync('./assignment-dist/random.js').toString();
+const algorithm = fs.createReadStream('./assignment-dist/random.js');
 
 // set the tasks to task pooler
 taskPooler.setTasksAndAlgorithm(tasks, algorithm).then(res => {
