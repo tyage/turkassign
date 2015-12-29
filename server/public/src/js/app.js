@@ -6,7 +6,7 @@ window.fetchTaskSet = () => {
   return $.getJSON(path).then(({ taskSet: rawTaskSet }) => {
     const taskSet = [];
     for (let i = 0, l = rawTaskSet.length; i < l; ++i) {
-      taskSet.push(new Task(rawTaskSet[i]));
+      taskSet.push(new Task(rawTaskSet[i]), i);
     }
     return taskSet;
   });
