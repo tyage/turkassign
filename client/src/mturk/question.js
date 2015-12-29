@@ -1,6 +1,6 @@
 import Config from '../config';
 
-const defaultQuestion = (algorithm, taskSetId) => {
+const defaultQuestion = (taskSetId) => {
   return `
 <!DOCTYPE html>
 <html lang="en">
