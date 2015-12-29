@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import uuid from 'node-uuid';
 import multer from 'multer';
 
-const upload = multer({ dest: './algorithm/' });
+const mult = multer({ dest: './algorithm/' });
 
 const app = express();
 const server = http.Server(app);
@@ -22,11 +22,11 @@ app.use(function(req, res, next) {
 
 const taskSets = [];
 
-const setUpload = upload.fields([
+const formOnSet = mult.fields([
   { name: 'taskSet' },
   { name: 'algorithm' },
 ]);
-app.put('/set', (req, res) => {
+app.put('/set', formOnSet, (req, res) => {
   const id = uuid();
 
   const taskSet = req.body.taskSet;
