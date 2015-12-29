@@ -4,6 +4,8 @@
   "description": "## What is this?",
   "main": "index.js",
   "scripts": {
+    "start": "npm build && `npm bin`/babel-node app.js",
+    "build": "`npm bin`/gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
