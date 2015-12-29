@@ -49,7 +49,7 @@ app.get('/algorithm/:id.js', (req, res) => {
   const id = req.params.id;
   const path = taskAlgorithms[id];
   if (!path) {
-    res.status(404).end();
+    return res.status(404).end();
   }
 
   const content = fs.readFileSync(path);
