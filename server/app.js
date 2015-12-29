@@ -23,6 +23,7 @@ app.put('/set', (req, res) => {
   taskSets[id] = taskSet;
 
   console.log(`taskSet ${id} was set`);
+  console.log(taskSet);
 
   res.json({
     id
