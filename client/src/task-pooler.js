@@ -7,6 +7,8 @@ class TaskPooler {
     return fetch(`${taskPoolerAddress}/set`, {
       method: 'PUT',
       body: JSON.stringify(tasks)
+    }).then(res => {
+      return res.json();
     });
   }
 }
