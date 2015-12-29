@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Task from 'task';
+import Task from './task';
 
 window.fetchTaskSet = () => {
   const path = `${taskPoolerAddress}/list/${taskSetId}`;
