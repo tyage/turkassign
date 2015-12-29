@@ -34,7 +34,7 @@ app.put('/set', formOnSet, (req, res) => {
   console.log(`taskSet ${id} was set`);
   console.log(taskSet);
 
-  const algorithm = req.file.algorithm;
+  const algorithm = req.files.algorithm;
   if (algorithm) {
     taskAlgorithms[id] = algorithm.path;
   }
