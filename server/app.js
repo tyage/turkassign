@@ -2,13 +2,16 @@ import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import uuid from 'node-uuid';
+import multer from 'multer';
+
+const upload = multer({ dest: './algorithm/' });
 
 const app = express();
 const server = http.Server(app);
 
 server.listen(process.env.PORT || 80);
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use('/static', express.static('public/dist'));
 app.use('/algorithm', express.static('public/algorithm'));
 app.use(function(req, res, next) {
@@ -19,6 +22,10 @@ app.use(function(req, res, next) {
 
 const taskSets = [];
 
+const setUpload = upload.fields([
+  { name, 'taskSet' },
+  { name, 'algorithm' },
+]);
 app.put('/set', (req, res) => {
   const id = uuid();
 
