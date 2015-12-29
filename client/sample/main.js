@@ -3,7 +3,7 @@ import { taskPooler, MTurk } from '../src/main';
 import tasks from './tasks';
 
 // assignment algorithm should be compiled because it will be run by worker's browser
-const algorithm = fs.readFileSync('./assignment-dist/random.js');
+const algorithm = fs.readFileSync('./assignment-dist/random.js').toString();
 
 // set the tasks to task pooler
 taskPooler.setTasksAndAlgorithm(tasks, algorithm).then(res => {
@@ -27,4 +27,4 @@ taskPooler.setTasksAndAlgorithm(tasks, algorithm).then(res => {
       'Reward.1.CurrencyCode': 'USD'
     });
   }
-});
+}).catch(e => console.log(e));
