@@ -47,7 +47,12 @@ app.put('/set', formOnSet, (req, res) => {
 
 app.get('/algorithm/:id.js', (req, res) => {
   const id = req.params.id;
-  const content = fs.readFileSync(taskAlgorithms[id]);
+  const path = taskAlgorithms[id];
+  if (!path) {
+    res.status(404).end();
+  }
+
+  const content = fs.readFileSync(path);
 
   res.type('text/javascript');
   res.send(content);
