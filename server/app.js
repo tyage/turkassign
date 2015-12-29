@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
+import uuid from 'node-uuid';
 
 const app = express();
 const server = http.Server(app);
@@ -18,7 +19,7 @@ app.use(function(req, res, next) {
 const taskSets = [];
 
 app.put('/set', (req, res) => {
-  const id = Math.random();
+  const id = uuid();
   const taskSet = req.body;
   taskSets[id] = taskSet;
 
