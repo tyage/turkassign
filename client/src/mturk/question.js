@@ -1,22 +1,24 @@
 import Config from '../config';
 
 const defaultQuestion = (taskSetId) => {
+  const taskPoolerAddress = Config.get('taskPoolerAddress');
   return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" href="${Config.get('taskPoolerAddress')}/static/css/app.css" />
+  <link rel="stylesheet" href="${taskPoolerAddress}/static/css/app.css" />
 </head>
 <body>
   <div id="content"></div>
   <script>
-window.taskPoolerAddress = "${Config.get('taskPoolerAddress')}";
+window.taskPoolerAddress = "${taskPoolerAddress}";
 window.taskSetId = "${taskSetId}";
   </script>
-  <script src="${Config.get('taskPoolerAddress')}/static/js/app.js"></script>
-  <script src="${Config.get('taskPoolerAddress')}/algorithm/${taskSetId}.js"></script>
+  <script src="${taskPoolerAddress}/static/js/app.js"></script>
+  <script src="${taskPoolerAddress}/algorithm/${taskSetId}.js"></script>
+  <script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
 </body>
 </html>
 `;
