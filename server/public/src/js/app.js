@@ -11,3 +11,17 @@ window.fetchTaskSet = () => {
     return taskSet;
   });
 };
+
+// task which budget > 0
+window.fetchAvailabeleTaskSet = () => {
+  return window.fetchTaskSet().then(taskSet => {
+    const filteredTaskSet = [];
+    for (let i = 0, l = taskSet.length; i < l; ++i) {
+      const task = taskSet[i];
+      if (task.budget > 0) {
+        filteredTaskSet.push(task);
+      }
+    }
+    return filteredTaskSet;
+  });
+};
