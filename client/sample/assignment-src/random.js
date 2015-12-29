@@ -16,6 +16,9 @@ import taskTemplate from './task-template';
 // ]
 
 fetchAvailabeleTaskSet().then(taskSet => {
+  if (taskSet.length === 0) {
+    return;
+  }
   const taskId = parseInt(Math.random() * taskSet.length);
   const selectedTask = taskSet[taskId];
   selectedTask.reserve();
