@@ -7,9 +7,8 @@ class MTurk {
   }
 
   createHIT(algorithm, taskSetId, apiParams = {}) {
-    // TODO: inject a algorithm in question page(worker process the algorithm)
     const params = Object.assign({
-      Question: generateQuestionXML(defaultQuestion(taskSetId)),
+      Question: generateQuestionXML(defaultQuestion(algorithm, taskSetId)),
       MaxAssignments: 1,
       Title: 'sample HIT ' + new Date(), // XXX: this is sample
       Description: 'sample desc', // XXX: this is sample
