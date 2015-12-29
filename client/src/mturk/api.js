@@ -35,7 +35,13 @@ class API {
 
     const param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
 
-    return fetch(`${this.api.endpoint}/?${param}`)
+    return fetch(this.api.endpoint, {
+      method: 'POST',
+      body: param,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
       .then(res => res.text())
       .then(text => {
         console.log(text); // TODO: use general logger
