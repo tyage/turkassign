@@ -19,7 +19,7 @@ const taskSets = [];
 
 app.put('/set', (req, res) => {
   const id = Math.random();
-  const taskSet = JSON.parse(req.body);
+  const taskSet = req.body;
   taskSets[id] = taskSet;
 
   console.log(`taskSet ${id} was set`);
