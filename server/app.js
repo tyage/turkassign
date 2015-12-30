@@ -20,7 +20,20 @@ app.use(function(req, res, next) {
   next();
 });
 
-const taskSets = [];
+/*
+taskSets = {
+  taskSetId: [
+    { task1 },
+    { task2 },
+  ]
+}
+
+task = {
+  data: task data,
+  budget: remaining budget,
+}
+*/
+const taskSets = {};
 
 const formOnSet = mult.fields([
   { name: 'taskSet' },
