@@ -44,7 +44,7 @@ const fetchAvailabeleTaskSet = taskSetId => {
   });
 };
 
-export default {
+export {
   registerNewTask,
   unreserveTasks,
   finishTask,
