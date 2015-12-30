@@ -17,11 +17,11 @@ const unreserveTasks = () => {
     }
   });
 };
-$(window).on('onbeforeunload', unreserveTasks);
+$(window).on('beforeunload', unreserveTasks);
 
 // タスクが完了した場合は、taskを返却する必要はない
 const finishTask = () => {
-  $(window).off('onbeforeunload', unreserveTasks);
+  $(window).off('beforeunload', unreserveTasks);
 };
 
 // fetch all tasks
