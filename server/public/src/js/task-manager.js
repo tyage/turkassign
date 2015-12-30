@@ -29,7 +29,7 @@ const fetchTaskSet = taskSetId => {
   // XXX: taskPoolerAddressは埋め込まれたaddressから取ってくる
   const path = `${window.taskPoolerAddress}/list/${taskSetId}`;
   return $.getJSON(path).then(({ taskSet }) => {
-    return _.map(taskSet, taskData => {
+    return _.map(taskSet, (taskData, i) => {
       const task = new Task(taskData, taskSetId, i);
       registerNewTask(task);
       return task;
