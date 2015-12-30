@@ -7,7 +7,7 @@ const registerNewTask = task => {
   tasks.push(task);
 };
 
-// ページから離脱する場合に確保したtaskを返却する
+// ページから離脱する場合に、確保したtaskを返却する
 const unreserveTasks = () => {
   _.each(tasks, task => {
     if (task.isReserved) {
@@ -17,8 +17,14 @@ const unreserveTasks = () => {
     }
   });
 };
-$.on('onbeforeunload', unreserveTasks);
+$(window).on('onbeforeunload', unreserveTasks);
 
+// タスクが完了した場合は、taskを返却する必要はない
+const finishTask = () => {
+  $(window).off('onbeforeunload', unreserveTasks);
+};
+
+// fetch all tasks
 const fetchTaskSet = taskSetId => {
   // XXX: taskPoolerAddressは埋め込まれたaddressから取ってくる
   const path = `${window.taskPoolerAddress}/list/${taskSetId}`;
@@ -41,6 +47,7 @@ const fetchAvailabeleTaskSet = taskSetId => {
 export default {
   registerNewTask,
   unreserveTasks,
+  finishTask,
   fetchAvailabeleTaskSet,
   fetchTaskSet
 };
