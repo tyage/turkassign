@@ -5,8 +5,17 @@ export default class Task {
     this.data = data;
     this.budget = data.budget;
     this.index = index;
+
+    this.isReserved = false;
   }
   reserve() {
+    if (this.isReserved) {
+      // task can reserved only once!
+      return;
+    }
+
+    this.isReserved = true;
+
     return $.ajax({
       url: `${taskPoolerAddress}/reserve`,
       method: 'POST',
@@ -17,6 +26,13 @@ export default class Task {
     });
   }
   unreserve() {
+    if (!this.isReserved) {
+      // task is not reserved yet.
+      return;
+    }
+
+    this.isReserved = false;
+
     return $.ajax({
       url: `${taskPoolerAddress}/unreserve`,
       method: 'POST',
