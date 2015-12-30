@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Task from './task';
 
-fetchTaskSet = (taskSetId) => {
+const fetchTaskSet = (taskSetId) => {
   // XXX: taskPoolerAddressは埋め込まれたaddressから取ってくる
   const path = `${window.taskPoolerAddress}/list/${taskSetId}`;
   return $.getJSON(path).then(({ taskSet: rawTaskSet }) => {
@@ -15,7 +15,7 @@ fetchTaskSet = (taskSetId) => {
 };
 
 // task which budget > 0
-fetchAvailabeleTaskSet = (taskSetId) => {
+const fetchAvailabeleTaskSet = (taskSetId) => {
   return window.fetchTaskSet(taskSetId).then(taskSet => {
     const filteredTaskSet = [];
     for (let i = 0, l = taskSet.length; i < l; ++i) {
