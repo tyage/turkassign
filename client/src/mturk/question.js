@@ -17,6 +17,10 @@ const defaultQuestion = (taskSetId) => {
   <script>
 window.finishTaskAssginment = function() {
   turkSetAssignmentID();
+
+  document.getElementById('mturk_form').addEventListener('submit', function() {
+    finishTask();
+  });
 };
   </script>
 
