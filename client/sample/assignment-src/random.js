@@ -24,4 +24,6 @@ fetchAvailabeleTaskSet().then(taskSet => {
   selectedTask.reserve();
 
   document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);
+
+  finishTaskAssginment();
 });
