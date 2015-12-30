@@ -1,9 +1,10 @@
 import $ from 'jquery';
 
 export default class Task {
-  constructor(data, index) {
+  constructor(data, taskSetId, index) {
     this.data = data;
     this.budget = data.budget;
+    this.taskSetId = taskSetId;
     this.index = index;
 
     this.isReserved = false;

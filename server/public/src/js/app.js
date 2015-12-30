@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Task from './task';
 
-window.fetchTaskSet = () => {
-  const path = `${taskPoolerAddress}/list/${taskSetId}`;
+window.fetchTaskSet = (taskSetId) => {
+  const path = `${window.taskPoolerAddress}/list/${taskSetId}`;
   return $.getJSON(path).then(({ taskSet: rawTaskSet }) => {
     const taskSet = [];
     for (let i = 0, l = rawTaskSet.length; i < l; ++i) {
@@ -13,8 +13,8 @@ window.fetchTaskSet = () => {
 };
 
 // task which budget > 0
-window.fetchAvailabeleTaskSet = () => {
-  return window.fetchTaskSet().then(taskSet => {
+window.fetchAvailabeleTaskSet = (taskSetId) => {
+  return window.fetchTaskSet(taskSetId).then(taskSet => {
     const filteredTaskSet = [];
     for (let i = 0, l = taskSet.length; i < l; ++i) {
       const task = taskSet[i];
