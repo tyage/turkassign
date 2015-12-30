@@ -11,7 +11,9 @@ const registerNewTask = task => {
 const unreserveTasks = () => {
   _.each(tasks, task => {
     if (task.isReserved) {
-      task.unreserve();
+      task.unreserve({
+        async: false
+      });
     }
   });
 };

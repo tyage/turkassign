@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'lodash';
 
 export default class Task {
   constructor(data, taskSetId, index) {
@@ -10,7 +11,7 @@ export default class Task {
 
     this.isReserved = false;
   }
-  reserve() {
+  reserve(settings) {
     if (this.isReserved) {
       // task can reserved only once!
       return;
@@ -18,16 +19,17 @@ export default class Task {
 
     this.isReserved = true;
 
-    return $.ajax({
+    settings = _.merge({
       url: `${window.taskPoolerAddress}/reserve`,
       method: 'POST',
       data: {
         taskSetId: this.taskSetId,
         index: this.index
       }
-    });
+    }, settings);
+    return $.ajax(settings);
   }
-  unreserve() {
+  unreserve(settings) {
     if (!this.isReserved) {
       // task is not reserved yet.
       return;
@@ -35,13 +37,14 @@ export default class Task {
 
     this.isReserved = false;
 
-    return $.ajax({
+    settings = _.merge({
       url: `${window.taskPoolerAddress}/unreserve`,
       method: 'POST',
       data: {
         taskSetId: this.taskSetId,
         index: this.index
       }
-    });
+    }, settings);
+    return $.ajax(settings);
   }
 }
