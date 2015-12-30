@@ -5,11 +5,11 @@ import tasks from './tasks';
 // assignment algorithm should be compiled because it will be run by worker's browser
 const algorithm = fs.createReadStream('./assignment-dist/random.js');
 
-// set the tasks to task pooler
+// set the tasks and assignment algorithm to task pooler
 taskPooler.setTasksAndAlgorithm(tasks, algorithm).then(res => {
   const taskSetId = res.id;
 
-  // create a HIT with algorithm and taskSetId
+  // create a HIT with taskSetId information
   const mturk = new MTurk({
     awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
     awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
