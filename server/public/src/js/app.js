@@ -2,11 +2,13 @@ import $ from 'jquery';
 import Task from './task';
 
 window.fetchTaskSet = (taskSetId) => {
+  // XXX: taskPoolerAddressは埋め込まれたaddressから取ってくる
   const path = `${window.taskPoolerAddress}/list/${taskSetId}`;
   return $.getJSON(path).then(({ taskSet: rawTaskSet }) => {
     const taskSet = [];
     for (let i = 0, l = rawTaskSet.length; i < l; ++i) {
-      taskSet.push(new Task(rawTaskSet[i], i));
+      const task = new Task(rawTaskSet[i], taskSetId, i);
+      taskSet.push(task);
     }
     return taskSet;
   });

@@ -4,6 +4,7 @@ export default class Task {
   constructor(data, taskSetId, index) {
     this.data = data;
     this.budget = data.budget;
+
     this.taskSetId = taskSetId;
     this.index = index;
 
@@ -18,10 +19,10 @@ export default class Task {
     this.isReserved = true;
 
     return $.ajax({
-      url: `${taskPoolerAddress}/reserve`,
+      url: `${window.taskPoolerAddress}/reserve`,
       method: 'POST',
       data: {
-        taskSetId,
+        taskSetId: this.taskSetId,
         index: this.index
       }
     });
@@ -35,10 +36,10 @@ export default class Task {
     this.isReserved = false;
 
     return $.ajax({
-      url: `${taskPoolerAddress}/unreserve`,
+      url: `${window.taskPoolerAddress}/unreserve`,
       method: 'POST',
       data: {
-        taskSetId,
+        taskSetId: this.taskSetId,
         index: this.index
       }
     });
