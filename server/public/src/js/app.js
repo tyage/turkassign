@@ -1,6 +1,6 @@
-import { fetchAvailabeleTaskSet, fetchTaskSet, finishTask } from './task-manager';
+import { fetchAvailableTaskSet, fetchTaskSet, finishTask } from './task-manager';
 
 // expose task manager
 window.finishTask = finishTask;
-window.fetchAvailabeleTaskSet = fetchAvailabeleTaskSet;
+window.fetchAvailableTaskSet = fetchAvailableTaskSet;
 window.fetchTaskSet = fetchTaskSet;

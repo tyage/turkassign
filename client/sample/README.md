@@ -16,13 +16,13 @@ You can use these APIs:
 
 - fetchTaskSet
     - fetch all tasks
-- fetchAvailabeleTaskSet
+- fetchAvailableTaskSet
     - fetch tasks which has one or more budgets
 - finishTaskAssginment
    - finish task assignment algorithm and call `turkSetAssignmentID`
 
 ```javascript
-fetchAvailabeleTaskSet().then(taskSet => {
+fetchAvailableTaskSet().then(taskSet => {
   // if there is no more tasks, finish the assignment
   if (taskSet.length === 0) {
     return;

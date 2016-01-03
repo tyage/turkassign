@@ -13,7 +13,7 @@ taskSet = [
 ]
 */
 
-fetchAvailabeleTaskSet(window.taskSetId).then(taskSet => {
+fetchAvailableTaskSet(window.taskSetId).then(taskSet => {
   if (taskSet.length === 0) {
     return;
   }

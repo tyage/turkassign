@@ -38,7 +38,7 @@ const fetchTaskSet = taskSetId => {
 };
 
 // task which budget > 0
-const fetchAvailabeleTaskSet = taskSetId => {
+const fetchAvailableTaskSet = taskSetId => {
   return window.fetchTaskSet(taskSetId).then(taskSet => {
     return _.filter(taskSet, task => task.budget > 0);
   });
@@ -48,6 +48,6 @@ export {
   registerNewTask,
   unreserveTasks,
   finishTask,
-  fetchAvailabeleTaskSet,
+  fetchAvailableTaskSet,
   fetchTaskSet
 };
