@@ -17,7 +17,7 @@ class MTurk {
       'Reward.1.Amount': 0.32, // XXX: this is sample
       'Reward.1.CurrencyCode': 'USD' // XXX: this is sample
     }, apiParams);
-    this.api.createHIT(params);
+    return this.api.createHIT(params);
   }
 };
 
