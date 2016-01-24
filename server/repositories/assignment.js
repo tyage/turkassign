@@ -60,7 +60,7 @@ const createAssignment = (taskId, workerId) => {
 };
 
 const getAssignment = id => {
-  return assignmentRepository.find(assignment => assignment.id === id);
+  return assignmentRepository.find(assignment => assignment.id === id) || null;
 }
 
 const finishAssignment = (id, workerId) => {

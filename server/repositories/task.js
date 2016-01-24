@@ -43,7 +43,7 @@ const getTask = id => {
   for (let groupId of Object.keys(taskRepository)) {
     const taskGroup = taskRepository[groupId];
     const task = taskGroup.find(task => task.id === id);
-    if (task !== null) {
+    if (task !== undefined) {
       return task;
     }
   }

@@ -83,7 +83,7 @@ app.post('/assign', (req, res) => {
   const noBudgetTask = tasks.find(task => {
     return task.budget <= 0;
   });
-  if (noBudgetTask !== null) {
+  if (noBudgetTask !== undefined) {
     res.json({ error: `task ${noBudgetTask.id} run out of its budget` });
     return;
   }
