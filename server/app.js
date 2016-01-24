@@ -41,8 +41,8 @@ app.put('/upload', uploadForm, (req, res) => {
 
   const fileId = uuid();
   const path = file[0].path;
-  const filename = `uploads/${fileId}.js`;
-  fs.rename(path, `./public/${filename}`);
+  const filename = `public/uploads/${fileId}.js`;
+  fs.rename(path, filename);
   res.json({
     filename
   });
