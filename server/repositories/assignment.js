@@ -71,7 +71,9 @@ const finishAssignment = (id, workerId) => {
     assignment.workerId !== workerId) {
     return;
   }
+
   assignment.status = statuses.FINISHED;
+
   return assignment;
 }
 
@@ -82,7 +84,11 @@ const cancelAssignment = (id, workerId) => {
     assignment.workerId !== workerId) {
     return;
   }
+
+  const task = getTask(assignment.taskId);
   assignment.status = statuses.CANCELED;
+  ++task.budget;
+
   return assignment;
 }
 
