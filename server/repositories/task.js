@@ -20,7 +20,7 @@ const createTaskGroup = tasks => {
   // TODO: set id to each task
   const groupId = uuid();
   taskRepository[groupId] = tasks;
-  return id;
+  return groupId;
 };
 
 const getAllTasks = () => taskRepository;
