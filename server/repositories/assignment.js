@@ -30,7 +30,7 @@ const watchTaskAssignment = () => {
     if (task === null || task.status !== statuses.ASSIGNED || !task.limit) {
       return;
     }
-    if (currentTime.getTime() > assignment.createdAt.getTime() + task.limit) {
+    if (currentTime.getTime() > assignment.createdAt.getTime() + task.limit * 1000) {
       task.status = statuses.TIMEOUT;
       ++task.budget;
       console.log(`assignment ${assignment.id} is timeout`)
