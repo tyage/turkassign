@@ -63,9 +63,11 @@ const getAssignment = id => {
   return assignmentRepository.find(assignment => assignment.id === id);
 }
 
-const finishAssignment = id => {
+const finishAssignment = (id, workerId) => {
   const assignment = getAssignment(id);
-  if (assignment === null || assignment.status === statuses.TIMEOUT) {
+  if (assignment === null ||
+    assignment.status === statuses.TIMEOUT ||
+    assignment.workerId !== workerId) {
     return;
   }
   assignment.status = statuses.FINISHED;
