@@ -28,13 +28,11 @@ const watchTaskAssignment = () => {
   const currentTime = new Date();
   assignmentRepository.forEach(assignment => {
     const task = getTask(assignment.taskId);
-    if (task === null || task.status !== statuses.ASSIGNED || !task.limit) {
+    if (task === null || !task.limit) {
       return;
     }
     if (currentTime.getTime() > assignment.createdAt.getTime() + task.limit * 1000) {
-      task.status = statuses.TIMEOUT;
-      ++task.budget;
-      console.log(`assignment ${assignment.id} is timeout`)
+      timeoutAssignment(assignment.id);
     }
   });
 };
@@ -62,7 +60,22 @@ const createAssignment = (taskId, workerId) => {
 
 const getAssignment = id => {
   return assignmentRepository.find(assignment => assignment.id === id) || null;
-}
+};
+
+const timeoutAssignment = id => {
+  const assignment = getAssignment(id);
+  if (assignment === null ||
+    assignment.status !== statuses.ASSIGNED) {
+    return;
+  }
+
+  const task = getTask(assignment.taskId);
+  ++task.budget;
+  assignment.status = statuses.TIMEOUT;
+  console.log(`assignment ${assignment.id} is timeout`);
+
+  return assignment;
+};
 
 const finishAssignment = (id, workerId) => {
   const assignment = getAssignment(id);
@@ -73,9 +86,10 @@ const finishAssignment = (id, workerId) => {
   }
 
   assignment.status = statuses.FINISHED;
+  console.log(`assignment ${assignment.id} is finished`);
 
   return assignment;
-}
+};
 
 const cancelAssignment = (id, workerId) => {
   const assignment = getAssignment(id);
@@ -86,11 +100,12 @@ const cancelAssignment = (id, workerId) => {
   }
 
   const task = getTask(assignment.taskId);
-  assignment.status = statuses.CANCELED;
   ++task.budget;
+  assignment.status = statuses.CANCELED;
+  console.log(`assignment ${assignment.id} is canceled`);
 
   return assignment;
-}
+};
 
 export {
   createAssignment,
