@@ -15,7 +15,7 @@ const questionTemplate = (taskGroupId, assignmentProgramUrl) => {
   <script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
   <script>
 window.taskPoolerAddress = "${taskPoolerAddress}";
-window.taskSetId = "${taskGroupId}";
+window.taskGroupId = "${taskGroupId}";
 window.platformType = 'MTurk';
   </script>
   <script src="${assignmentProgramUrl}"></script>

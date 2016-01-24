@@ -107,12 +107,11 @@ app.post('/assign', (req, res) => {
 */
 app.post('/finish', (req, res) => {
   const { assignmentIds } = req.body;
-  const tasks = getTasks(ids);
   // TODO: get workerId from cookie
   const workerId = 1;
 
   const assignments = assignmentIds.map(assignmentId => {
-    return finishAssignment(assignmentId);
+    return finishAssignment(assignmentId, workerId);
   });
   console.log(`assignments ${assignmentIds.join(',')} was finished by ${workerId}`);
 

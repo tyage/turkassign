@@ -5,7 +5,6 @@ import tasks from './tasks';
 // assignment algorithm should be compiled because it will be run by worker's browser
 const assignmentProgram = fs.createReadStream('./assignment-dist/random.js');
 
-// create a HIT with taskSetId information
 const mturk = new MTurk({
   awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
   awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
@@ -15,6 +14,7 @@ const mturk = new MTurk({
 taskPooler.setTasks(tasks).then(res => {
   const { taskGroupId } = res;
 
+  // create a HIT with taskGroupId and assignmentProgram
   mturk.createHIT(taskGroupId, assignmentProgram, {
     'Title': 'Estimate age of the photo',
     'MaxAssignment': 1,

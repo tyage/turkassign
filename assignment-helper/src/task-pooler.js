@@ -8,7 +8,7 @@ const assignTasks = taskIds => {
       url: `${endpoint}/assign`,
       method: 'POST',
       data: {
-        tasksIds
+        taskIds
       }
   });
 };

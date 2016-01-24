@@ -3,20 +3,17 @@ import taskTemplate from './task-template';
 import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'task-pooler-assignment-helper';
 
 /*
-worker assigned a task which is choosed by random
-
-taskSet = [
+tasks = [
   {
     data: task data,
-    budget: remaining budget, budget should be > 0
-    reserve: reserve this task,
-    unreserve: unreserve this task
+    budget: remaining budget,
+    limit: time limit that worker perform
   }
 ]
 */
 
 fetchAvailableTasks().then(tasks => {
-  if (taskSet.length === 0) {
+  if (tasks.length === 0) {
     return;
   }
 
@@ -24,7 +21,7 @@ fetchAvailableTasks().then(tasks => {
   const selectedTask = tasks[index];
   reserveTasks([ selectedTask ]);
 
-  $('#content').html(taskTemplate(selectedTask.data.images));
+  $('#content').html(taskTemplate(selectedTask.data));
 
   finishTaskAssginment();
 });
