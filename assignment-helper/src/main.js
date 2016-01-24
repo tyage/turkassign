@@ -13,10 +13,11 @@ const fetchAvailableTasks = taskGroupId => {
 
 // reserve tasks
 const reserveTasks = tasks => {
-  tasks.forEach(task => {
+  _.each(tasks, task => {
     assignedTasks.push(task);
   });
-  return assignTasks(tasks);
+  const taskIds = _.map(tasks, task => task.id);
+  return assignTasks(taskIds);
 };
 
 // ページから離脱する場合に、確保したtaskを返却する

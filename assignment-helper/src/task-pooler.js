@@ -5,11 +5,11 @@ const endpoint = window.taskPoolerAddress;
 
 const assignTasks = taskIds => {
   return $.ajax({
-      url: `${endpoint}/assign`,
-      method: 'POST',
-      data: {
-        taskIds
-      }
+    url: `${endpoint}/assign`,
+    method: 'POST',
+    data: {
+      taskIds
+    }
   });
 };
 

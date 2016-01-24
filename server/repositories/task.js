@@ -17,9 +17,13 @@ task = {
 const taskRepository = {};
 
 const createTaskGroup = tasks => {
-  // TODO: set id to each task
+  tasks.forEach(task => {
+    task.id = uuid();
+  });
+
   const groupId = uuid();
   taskRepository[groupId] = tasks;
+
   return groupId;
 };
 
