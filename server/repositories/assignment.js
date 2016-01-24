@@ -26,7 +26,6 @@ const statuses = {
 // if task has not finished yet for some fixed time after assignment, remove the assignment
 const watchTaskAssignment = () => {
   const currentTime = new Date();
-  console.log(currentTime);
   assignmentRepository.forEach(assignment => {
     const task = getTask(assignment.taskId);
     if (task === null || task.status !== statuses.ASSIGNED || !task.limit) {
