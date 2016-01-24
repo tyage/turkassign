@@ -24,14 +24,18 @@ const reserveTasks = tasks => {
 
 // ページから離脱する場合に、確保したtaskを返却する
 const unreserveTasks = () => {
-  cancelAssignments(_.map(assignments, assignment => assignment.id));
+  if (assignments.length > 0) {
+    cancelAssignments(_.map(assignments, assignment => assignment.id));
+  }
 };
 $(window).on('beforeunload', unreserveTasks);
 
 // タスクが完了した場合は、taskを返却する必要はない
 const finishTask = () => {
   $(window).off('beforeunload', unreserveTasks);
-  finishAssignments(_.map(assignments, assignment => assignment.id));
+  if (assignments.length > 0) {
+    finishAssignments(_.map(assignments, assignment => assignment.id));
+  }
 };
 
 const finishTaskAssginment = () => {

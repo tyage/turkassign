@@ -110,6 +110,10 @@ app.post('/finish', (req, res) => {
   // TODO: get workerId from cookie
   const workerId = 1;
 
+  if (!assignmentIds) {
+    return;
+  }
+
   const assignments = assignmentIds.map(assignmentId => {
     return finishAssignment(assignmentId, workerId);
   });
@@ -131,6 +135,10 @@ app.post('/cancel', (req, res) => {
   const { assignmentIds } = req.body;
   // TODO: get workerId from cookie
   const workerId = 1;
+
+  if (!assignmentIds) {
+    return;
+  }
 
   const assignments = assignmentIds.map(assignmentId => {
     return cancelAssignment(assignmentId, workerId);
