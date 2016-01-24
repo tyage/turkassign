@@ -1,4 +1,5 @@
 import taskTemplate from './task-template';
+import { fetchAvailableTaskSet, finishTaskAssginment } from 'task-pooler-assignment-helper';
 
 /*
 worker assigned a task which is choosed by random

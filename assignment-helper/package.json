@@ -2,12 +2,17 @@
   "name": "task-pooler-assignment-helper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/main.js",
   "scripts": {
+    "build": "`npm bin`/babel src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-preset-es2015": "^6.3.13"
+  },
   "dependencies": {
     "jquery": "^2.1.4",
     "lodash": "^3.10.1"

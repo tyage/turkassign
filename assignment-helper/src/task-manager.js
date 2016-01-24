@@ -49,11 +49,6 @@ const reserveTasks = tasks => {
 
 };
 
-// unreserve tasks
-const unreserveTasks = tasks => {
-
-};
-
 export {
   registerNewTask,
   unreserveTasks,
