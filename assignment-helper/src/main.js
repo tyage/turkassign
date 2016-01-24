@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import { assignTasks, fetchTaskGroup } from './task-pooler';
+import { assignTasks, fetchTaskGroup, finishAssignments, cancelAssignments } from './task-pooler';
 
-const assignedTasks = [];
+const assignments = [];
 
 // task which budget > 0
 const fetchAvailableTasks = taskGroupId => {
@@ -13,23 +13,25 @@ const fetchAvailableTasks = taskGroupId => {
 
 // reserve tasks
 const reserveTasks = tasks => {
-  _.each(tasks, task => {
-    assignedTasks.push(task);
-  });
   const taskIds = _.map(tasks, task => task.id);
-  return assignTasks(taskIds);
+  return assignTasks(taskIds).then((res) => {
+    const newAssignments = res.assignments;
+    _.each(newAssignments, assignment => {
+      assignments.push(assignment);
+    });
+  });
 };
 
 // ページから離脱する場合に、確保したtaskを返却する
 const unreserveTasks = () => {
-  // TODO
+  cancelAssignments(_.map(assignments, assignment => assignment.id));
 };
 $(window).on('beforeunload', unreserveTasks);
 
 // タスクが完了した場合は、taskを返却する必要はない
 const finishTask = () => {
   $(window).off('beforeunload', unreserveTasks);
-  // TODO: notify task is finished
+  finishAssignments(_.map(assignments, assignment => assignment.id));
 };
 
 const finishTaskAssginment = () => {

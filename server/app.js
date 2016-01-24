@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import fs from 'fs';
 import { createTaskGroup, getTasks, getTaskGroup } from './repositories/task';
-import { createAssignment, finishAssignment } from './repositories/assignment';
+import { createAssignment, finishAssignment, cancelAssignment } from './repositories/assignment';
 import uuid from 'node-uuid';
 
 const mult = multer({ dest: './uploads/' });
@@ -114,6 +114,28 @@ app.post('/finish', (req, res) => {
     return finishAssignment(assignmentId, workerId);
   });
   console.log(`assignments ${assignmentIds.join(',')} was finished by ${workerId}`);
+
+  res.json({
+    assignments
+  });
+});
+
+/*
+  POST /cancel
+    assignmentIds: list of id of assignments
+
+  return:
+    assignments: data of assignments
+*/
+app.post('/cancel', (req, res) => {
+  const { assignmentIds } = req.body;
+  // TODO: get workerId from cookie
+  const workerId = 1;
+
+  const assignments = assignmentIds.map(assignmentId => {
+    return cancelAssignment(assignmentId, workerId);
+  });
+  console.log(`assignments ${assignmentIds.join(',')} was canceled by ${workerId}`);
 
   res.json({
     assignments

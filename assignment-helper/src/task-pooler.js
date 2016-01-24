@@ -7,6 +7,7 @@ const assignTasks = taskIds => {
   return $.ajax({
     url: `${endpoint}/assign`,
     method: 'POST',
+    type: 'json',
     data: {
       taskIds
     }
@@ -18,7 +19,31 @@ const fetchTaskGroup = (taskGroupId = window.taskGroupId) => {
   return $.getJSON(path);
 };
 
+const finishAssignments = assignmentIds => {
+  return $.ajax({
+    url: `${endpoint}/finish`,
+    method: 'POST',
+    type: 'json',
+    data: {
+      assignmentIds
+    }
+  });
+};
+
+const cancelAssignments = assignmentIds => {
+  return $.ajax({
+    url: `${endpoint}/cancel`,
+    method: 'POST',
+    type: 'json',
+    data: {
+      assignmentIds
+    }
+  });
+};
+
 export {
   assignTasks,
-  fetchTaskGroup
+  fetchTaskGroup,
+  finishAssignments,
+  cancelAssignments
 };

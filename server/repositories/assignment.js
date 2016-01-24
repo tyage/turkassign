@@ -11,7 +11,7 @@ assignment = {
   taskId: id of task,
   workerId: id of worker
   createdAt: time when assigned,
-  status: statuses.ASSIGNED or statuses.TIMEOUT or statuses.FINISHED,
+  status: assignment status
 }
 */
 const assignmentRepository = [];
@@ -20,11 +20,13 @@ const statuses = {
   ASSIGNED: 'ASSIGNED',
   TIMEOUT: 'TIMEOUT',
   FINISHED: 'FINISHED',
+  CANCELED: 'CANCELED',
 };
 
 // if task has not finished yet for some fixed time after assignment, remove the assignment
 const watchTaskAssignment = () => {
   const currentTime = new Date();
+  console.log(currentTime);
   assignmentRepository.forEach(assignment => {
     const task = getTask(assignment.taskId);
     if (task === null || task.status !== statuses.ASSIGNED || !task.limit) {
@@ -66,7 +68,7 @@ const getAssignment = id => {
 const finishAssignment = (id, workerId) => {
   const assignment = getAssignment(id);
   if (assignment === null ||
-    assignment.status === statuses.TIMEOUT ||
+    assignment.status !== statuses.ASSIGNED ||
     assignment.workerId !== workerId) {
     return;
   }
@@ -74,8 +76,20 @@ const finishAssignment = (id, workerId) => {
   return assignment;
 }
 
+const cancelAssignment = (id, workerId) => {
+  const assignment = getAssignment(id);
+  if (assignment === null ||
+    assignment.status !== statuses.ASSIGNED ||
+    assignment.workerId !== workerId) {
+    return;
+  }
+  assignment.status = statuses.CANCELED;
+  return assignment;
+}
+
 export {
   createAssignment,
   getAssignment,
-  finishAssignment
+  finishAssignment,
+  cancelAssignment
 };
