@@ -12,29 +12,24 @@ $ AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=XXX npm start
 
 ## Sample assignment algorithm
 
-You can use these APIs:
-
-- fetchTaskSet
-    - fetch all tasks
-- fetchAvailableTaskSet
-    - fetch tasks which has one or more budgets
-- finishTaskAssginment
-   - finish task assignment algorithm and call `turkSetAssignmentID`
-
 ```javascript
-fetchAvailableTaskSet().then(taskSet => {
+import $ from 'jquery';
+import taskTemplate from './task-template';
+import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'task-pooler-assignment-helper';
+
+fetchAvailableTasks().then(tasks => {
   // if there is no more tasks, finish the assignment
-  if (taskSet.length === 0) {
+  if (tasks.length === 0) {
     return;
   }
 
   // select a task from taskSet
-  const taskId = parseInt(Math.random() * taskSet.length);
-  const selectedTask = taskSet[taskId];
-  selectedTask.reserve();
+  const index = parseInt(Math.random() * tasks.length);
+  const selectedTask = tasks[index];
+  reserveTasks([ selectedTask ]);
 
   // show task page
-  document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);
+  $('#content').html(taskTemplate(selectedTask.data));
 
   // finish task assignment
   finishTaskAssginment();
