@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
     file: uploaded file
 
   return:
-    id of task group
+    filename: filename of uploaded file
 */
 const uploadForm = mult.fields([
   { name: 'file' },
@@ -52,7 +52,7 @@ app.put('/upload', uploadForm, (req, res) => {
     tasks: data of tasks
 
   return:
-    id of task group
+    taskGroupId: id of task group
 */
 app.put('/set', (req, res) => {
   const { tasks } = req.body;
@@ -61,7 +61,7 @@ app.put('/set', (req, res) => {
   console.log(tasks);
 
   res.json({
-    groupId
+    taskGroupId
   });
 });
 
@@ -70,7 +70,7 @@ app.put('/set', (req, res) => {
     taskIds: list of id of tasks
 
   return:
-    assignments
+    assignments: data of assignments
 */
 app.post('/assign', (req, res) => {
   const { taskIds } = req.body;
@@ -102,7 +102,7 @@ app.post('/assign', (req, res) => {
     assignmentIds: list of id of assignments
 
   return:
-    assignments
+    assignments: data of assignments
 */
 app.post('/finish', (req, res) => {
   const { assignmentIds } = req.body;
@@ -125,7 +125,7 @@ app.post('/finish', (req, res) => {
     groupId: id of task group
 
   return:
-    task group
+    taskGroup: data of task group
 */
 app.get('/list/:groupId', (req, res) => {
   const { groupId } = req.params;
