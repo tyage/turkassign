@@ -33,6 +33,7 @@ const watchTaskAssignment = () => {
     }
     if (currentTime.getTime() > assignment.createdAt.getTime() + task.limit * 1000) {
       timeoutAssignment(assignment.id);
+      console.log(`assignment ${assignment.id} is timeout`);
     }
   });
 };
@@ -72,7 +73,6 @@ const timeoutAssignment = id => {
   const task = getTask(assignment.taskId);
   ++task.budget;
   assignment.status = statuses.TIMEOUT;
-  console.log(`assignment ${assignment.id} is timeout`);
 
   return assignment;
 };
@@ -86,7 +86,6 @@ const finishAssignment = (id, workerId) => {
   }
 
   assignment.status = statuses.FINISHED;
-  console.log(`assignment ${assignment.id} is finished`);
 
   return assignment;
 };
@@ -102,7 +101,6 @@ const cancelAssignment = (id, workerId) => {
   const task = getTask(assignment.taskId);
   ++task.budget;
   assignment.status = statuses.CANCELED;
-  console.log(`assignment ${assignment.id} is canceled`);
 
   return assignment;
 };
