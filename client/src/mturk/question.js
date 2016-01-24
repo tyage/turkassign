@@ -8,7 +8,6 @@ const defaultQuestion = (taskSetId) => {
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" href="${taskPoolerAddress}/static/css/app.css" />
 </head>
 <body>
   <div id="content"></div>

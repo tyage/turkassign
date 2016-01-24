@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import uuid from 'node-uuid';
 import multer from 'multer';
 import fs from 'fs';
+import { createTasks, getTasks } from './task-repository';
 
 const mult = multer({ dest: './uploads/' });
 const app = express();
@@ -21,31 +22,23 @@ app.use(function(req, res, next) {
 });
 
 /*
-taskSets = {
-  taskSetId: [
-    { task1 },
-    { task2 },
-  ]
-}
+  PUT /set
+    taskSet: set of tasks
+    algorithm: algorithm files
 
-task = {
-  data: task data,
-  budget: remaining budget,
-}
+  return:
+    id
 */
-const taskSets = {};
-
 const formOnSet = mult.fields([
   { name: 'taskSet' },
   { name: 'algorithm' },
 ]);
+// TODO: algorithmとtasksを分離
 app.put('/set', formOnSet, (req, res) => {
-  const id = uuid();
-
-  const taskSet = req.body.taskSet;
-  taskSets[id] = JSON.parse(taskSet);
+  const tasks = req.body.tasks;
+  const id = createTasks(JSON.parse(tasks));
   console.log(`taskSet ${id} was set`);
-  console.log(taskSet);
+  console.log(tasks);
 
   const algorithm = req.files.algorithm;
   if (algorithm) {
@@ -58,41 +51,77 @@ app.put('/set', formOnSet, (req, res) => {
   });
 });
 
-app.post('/reserve', (req, res) => {
-  const { taskSetId, index } = req.body;
-  const task = taskSets[taskSetId][index];
+/*
+  POST /reserve
+    id: id of task set
+    indexes: indexes of tasks
 
-  if (task.budget <= 0) {
-    res.json({ error: `task ${index} run out of its budget` });
+  return:
+    current data of tasks
+*/
+app.post('/reserve', (req, res) => {
+  const { id, indexes } = req.body;
+  const tasks = getTasks(id);
+
+  // check if there is any task that runs out of its budget
+  const noBudgetTask = indexes.find(index => {
+    const task = tasks[index];
+    return task && task.budget <= 0;
+  });
+  if (noBudgetTask !== null) {
+    res.json({ error: `task ${noBudgetTask} of ${id} run out of its budget` });
     return;
   }
 
-  --task.budget;
-
-  console.log(`task ${index} of taskSet ${taskSetId} was reserved`);
+  // TODO: call reserve function of repository and watch for limit times
+  indexes.forEach(index => {
+    const task = tasks[index];
+    task && --task.budget;
+  });
+  console.log(`task ${indexes.join(',')} of ${id} was reserved`);
 
   res.json({
-    task
+    tasks
   });
 });
 
+/*
+  POST /unreserve
+    id: id of task set
+    indexes: indexes of tasks
+
+  return:
+    current data of tasks
+*/
 app.post('/unreserve', (req, res) => {
-  const { taskSetId, index } = req.body;
-  const task = taskSets[taskSetId][index];
+  const { id, indexes } = req.body;
+  const tasks = getTasks(id);
 
-  ++task.budget;
+  // TODO: call unreserve function of repository and watch for limit times
+  indexes.forEach(index => {
+    const task = tasks[index];
+    task && ++task.budget;
+  });
 
-  console.log(`task ${index} of taskSet ${taskSetId} was unreserved`);
+  console.log(`task ${indexes.join(',')} of ${id} was unreserved`);
 
   res.json({
-    task
+    tasks
   });
 });
 
+/*
+  GET /list/:id
+    id: id of task set
+
+  return:
+    current data of tasks
+*/
 app.get('/list/:id', (req, res) => {
   const id = req.params.id;
+  const tasks = getTasks(id);
 
   res.json({
-    taskSet: taskSets[id]
+    tasks
   });
 });

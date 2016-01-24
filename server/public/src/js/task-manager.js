@@ -44,10 +44,22 @@ const fetchAvailableTaskSet = taskSetId => {
   });
 };
 
+// reserve tasks
+const reserveTasks = tasks => {
+
+};
+
+// unreserve tasks
+const unreserveTasks = tasks => {
+
+};
+
 export {
   registerNewTask,
   unreserveTasks,
   finishTask,
   fetchAvailableTaskSet,
-  fetchTaskSet
+  fetchTaskSet,
+  reserveTasks,
+  unreserveTasks
 };
