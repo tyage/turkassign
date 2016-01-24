@@ -1,23 +1,26 @@
 import API from './api';
-import { generateQuestionXML, defaultQuestion } from './question';
+import { generateQuestionXML, questionTemplate } from './question';
+import taskPooler from '../task-pooler';
 
 class MTurk {
   constructor(apiParams) {
     this.api = new API(apiParams);
   }
 
-  createHIT(taskSetId, apiParams = {}) {
-    const params = Object.assign({
-      Question: generateQuestionXML(defaultQuestion(taskSetId)),
-      MaxAssignments: 1,
-      Title: 'sample HIT ' + new Date(), // XXX: this is sample
-      Description: 'sample desc', // XXX: this is sample
-      AssignmentDurationInSeconds: 30, // XXX: this is sample
-      LifetimeInSeconds: 3600, // XXX: this is sample
-      'Reward.1.Amount': 0.32, // XXX: this is sample
-      'Reward.1.CurrencyCode': 'USD' // XXX: this is sample
-    }, apiParams);
-    return this.api.createHIT(params);
+  createHIT(taskGroupId, assignmentProgram, apiParams = {}) {
+    const taskPoolerAddress = Config.get('taskPoolerAddress');
+    taskPooler.uploadFile(assignmentProgram).then(res => {
+      const { filename } = res;
+      const assignmentProgramUrl = `${taskPoolerAddress}/${filename}`;
+
+      const question = questionTemplate(taskGroupId, assignmentProgramUrl);
+      const questionXML = generateQuestionXML(question);
+
+      const params = Object.assign({
+        Question: questionXML
+      }, apiParams);
+      return this.api.createHIT(params);
+    });
   }
 };
 

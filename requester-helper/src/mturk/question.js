@@ -1,6 +1,6 @@
 import Config from '../config';
 
-const defaultQuestion = (taskSetId) => {
+const questionTemplate = (taskGroupId, assignmentProgramUrl) => {
   const taskPoolerAddress = Config.get('taskPoolerAddress');
   return `
 <!DOCTYPE html>
@@ -25,10 +25,9 @@ window.finishTaskAssginment = function() {
 
   <script>
 window.taskPoolerAddress = "${taskPoolerAddress}";
-window.taskSetId = "${taskSetId}";
+window.taskSetId = "${taskGroupId}";
   </script>
-  <script src="${taskPoolerAddress}/static/js/app.js"></script>
-  <script src="${taskPoolerAddress}/algorithm/${taskSetId}.js"></script>
+  <script src="${assignmentProgramUrl}"></script>
 </body>
 </html>
 `;
@@ -40,7 +39,7 @@ const generateQuestionXML = (content, frameHeight = 450) => {
   <HTMLContent><![CDATA[ ${content} ]]></HTMLContent>
   <FrameHeight>${frameHeight}</FrameHeight>
 </HTMLQuestion>
-`
+`;
 };
 
-export { defaultQuestion, generateQuestionXML };
+export { questionTemplate, generateQuestionXML };
