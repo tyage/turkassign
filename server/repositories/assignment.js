@@ -14,7 +14,7 @@ assignment = {
   status: statuses.ASSIGNED or statuses.TIMEOUT or statuses.FINISHED,
 }
 */
-const assignmentRepository = {};
+const assignmentRepository = [];
 
 const statuses = {
   ASSIGNED: 'ASSIGNED',

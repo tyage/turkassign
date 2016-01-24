@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import taskTemplate from './task-template';
 import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'task-pooler-assignment-helper';
 
@@ -23,7 +24,7 @@ fetchAvailableTasks().then(tasks => {
   const selectedTask = tasks[index];
   reserveTasks([ selectedTask ]);
 
-  document.getElementById('content').innerHTML = taskTemplate(selectedTask.data.images);
+  $('#content').html(taskTemplate(selectedTask.data.images));
 
   finishTaskAssginment();
 });

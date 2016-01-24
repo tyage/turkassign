@@ -46,7 +46,7 @@ const getTask = id => {
 };
 
 export {
-  createTasks,
+  createTaskGroup,
   getTaskGroup,
   getTasks,
   getTask
