@@ -23,62 +23,59 @@ app.use(function(req, res, next) {
 
 /*
   PUT /set
-    taskSet: set of tasks
+    tasks: data of tasks
     algorithm: algorithm files
 
   return:
-    id
+    id of task group
 */
 const formOnSet = mult.fields([
-  { name: 'taskSet' },
+  { name: 'tasks' },
   { name: 'algorithm' },
 ]);
 // TODO: algorithmとtasksを分離
 app.put('/set', formOnSet, (req, res) => {
-  const tasks = req.body.tasks;
-  const id = createTasks(JSON.parse(tasks));
-  console.log(`taskSet ${id} was set`);
+  const { tasks } = req.body;
+  const groupId = createTaskGroup(JSON.parse(tasks));
+  console.log(`taskGroup ${groupId} was created`);
   console.log(tasks);
 
-  const algorithm = req.files.algorithm;
+  const { algorithm } = req.files;
   if (algorithm) {
     const path = algorithm[0].path;
     fs.rename(path, `./algorithm/${id}.js`);
   }
 
   res.json({
-    id
+    groupId
   });
 });
 
 /*
   POST /reserve
-    id: id of task set
-    indexes: indexes of tasks
+    ids: list of id of tasks
 
   return:
-    current data of tasks
+    tasks
 */
 app.post('/reserve', (req, res) => {
-  const { id, indexes } = req.body;
-  const tasks = getTasks(id);
+  const { ids } = req.body;
+  const tasks = getTasks(ids);
 
   // check if there is any task that runs out of its budget
-  const noBudgetTask = indexes.find(index => {
-    const task = tasks[index];
-    return task && task.budget <= 0;
+  const noBudgetTask = tasks.find(task => {
+    return task.budget <= 0;
   });
   if (noBudgetTask !== null) {
-    res.json({ error: `task ${noBudgetTask} of ${id} run out of its budget` });
+    res.json({ error: `task ${noBudgetTask.id} run out of its budget` });
     return;
   }
 
   // TODO: call reserve function of repository and watch for limit times
-  indexes.forEach(index => {
-    const task = tasks[index];
-    task && --task.budget;
+  tasks.forEach(task => {
+    --task.budget;
   });
-  console.log(`task ${indexes.join(',')} of ${id} was reserved`);
+  console.log(`tasks ${ids.join(',')} was reserved`);
 
   res.json({
     tasks
@@ -87,23 +84,21 @@ app.post('/reserve', (req, res) => {
 
 /*
   POST /unreserve
-    id: id of task set
-    indexes: indexes of tasks
+    ids: list of id of tasks
 
   return:
-    current data of tasks
+    tasks
 */
 app.post('/unreserve', (req, res) => {
-  const { id, indexes } = req.body;
-  const tasks = getTasks(id);
+  const { ids } = req.body;
+  const tasks = getTasks(ids);
 
   // TODO: call unreserve function of repository and watch for limit times
-  indexes.forEach(index => {
-    const task = tasks[index];
-    task && ++task.budget;
+  tasks.forEach(task => {
+    ++task.budget;
   });
 
-  console.log(`task ${indexes.join(',')} of ${id} was unreserved`);
+  console.log(`task ${ids.join(',')} was unreserved`);
 
   res.json({
     tasks
@@ -111,17 +106,17 @@ app.post('/unreserve', (req, res) => {
 });
 
 /*
-  GET /list/:id
-    id: id of task set
+  GET /list/:groupId
+    groupId: id of task group
 
   return:
-    current data of tasks
+    task group
 */
-app.get('/list/:id', (req, res) => {
-  const id = req.params.id;
-  const tasks = getTasks(id);
+app.get('/list/:groupId', (req, res) => {
+  const { groupId } = req.params;
+  const taskGroup = getTaskGroup(groupId);
 
   res.json({
-    tasks
+    taskGroup
   });
 });

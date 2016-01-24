@@ -1,8 +1,8 @@
 /*
 taskRepository = {
-  id: [
-    { task1 },
-    { task2 },
+  groupId: [
+    task,
+    task,
   ]
 }
 
@@ -14,14 +14,37 @@ task = {
 */
 const taskRepository = {};
 
-const createTasks = tasks => {
-  const id = uuid();
-  taskRepository[id] = tasks;
+const createTaskGroup = tasks => {
+  // TODO: set id to each task
+  const groupId = uuid();
+  taskRepository[groupId] = tasks;
   return id;
 };
-const getTasks = id => taskRepository[id];
+const getAllTasks = () => taskRepository;
+const getTaskGroup = groupId => taskRepository[groupId] || null;
+const getTasks = ids => {
+  const tasks = [];
+  ids.forEach(id => {
+    const task = getTask(id);
+    if (task !== null) {
+      tasks.push(task);
+    }
+  });
+  return tasks;
+};
+const getTask = id => {
+  for (let taskGroup of taskRepository) {
+    const task = taskGroup.find(task => task.id === id);
+    if (task !== null) {
+      return task;
+    }
+  }
+  return null;
+};
 
 export {
   createTasks,
-  getTasks
+  getTaskGroup,
+  getTasks,
+  getTask
 };
