@@ -27,7 +27,7 @@ const watchTaskAssignment = () => {
   const currentTime = new Date();
   assignmentRepository.forEach(assignment => {
     const task = getTask(assignment.taskId);
-    if (task === null || task.status !== statuses.ASSIGNED) {
+    if (task === null || task.status !== statuses.ASSIGNED || !task.limit) {
       return;
     }
     if (currentTime.getTime() > assignment.createdAt.getTime() + task.limit) {
@@ -40,7 +40,7 @@ const watchTaskAssignment = () => {
 setInterval(watchTaskAssignment, 1000);
 
 const createAssignment = (taskId, workerId) => {
-  const task = getTask(assignment)
+  const task = getTask(taskId);
   if (task === null) {
     return;
   }
