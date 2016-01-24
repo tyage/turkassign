@@ -1,7 +1,7 @@
-import Config from '../config';
+import config from '../config';
 
 const questionTemplate = (taskGroupId, assignmentProgramUrl) => {
-  const taskPoolerAddress = Config.get('taskPoolerAddress');
+  const taskPoolerAddress = config.get('taskPoolerAddress');
   return `
 <!DOCTYPE html>
 <html lang="en">

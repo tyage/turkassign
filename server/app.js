@@ -35,6 +35,7 @@ app.put('/upload', uploadForm, (req, res) => {
   const { file } = req.files;
 
   if (file || file.length === 0) {
+    res.json({ error: 'file to upload is not found' });
     return;
   }
 
