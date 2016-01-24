@@ -13,7 +13,7 @@ const server = http.Server(app);
 
 server.listen(process.env.PORT || 80);
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/public', express.static('public'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
