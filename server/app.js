@@ -58,7 +58,7 @@ app.put('/upload', uploadForm, (req, res) => {
 app.put('/set', (req, res) => {
   const { tasks } = req.body;
   const taskGroupId = createTaskGroup(JSON.parse(tasks));
-  console.log(`taskGroup ${taskGroupId} was created`);
+  console.log(`taskGroup ${taskGroupId} is created`);
   console.log(tasks);
 
   res.json({
@@ -91,7 +91,7 @@ app.post('/assign', (req, res) => {
   const assignments = tasks.map(task => {
     return createAssignment(task.id, workerId);
   });
-  console.log(`tasks ${taskIds.join(',')} was assigned to ${workerId}`);
+  console.log(`tasks ${taskIds.join(',')} is assigned to ${workerId}`);
 
   res.json({
     assignments
@@ -113,7 +113,7 @@ app.post('/finish', (req, res) => {
   const assignments = assignmentIds.map(assignmentId => {
     return finishAssignment(assignmentId, workerId);
   });
-  console.log(`assignments ${assignmentIds.join(',')} was finished by ${workerId}`);
+  console.log(`assignments ${assignmentIds.join(',')} is finished by ${workerId}`);
 
   res.json({
     assignments
@@ -135,7 +135,7 @@ app.post('/cancel', (req, res) => {
   const assignments = assignmentIds.map(assignmentId => {
     return cancelAssignment(assignmentId, workerId);
   });
-  console.log(`assignments ${assignmentIds.join(',')} was canceled by ${workerId}`);
+  console.log(`assignments ${assignmentIds.join(',')} is canceled by ${workerId}`);
 
   res.json({
     assignments
