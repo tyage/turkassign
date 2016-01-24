@@ -14,18 +14,9 @@ const questionTemplate = (taskGroupId, assignmentProgramUrl) => {
 
   <script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
   <script>
-window.finishTaskAssginment = function() {
-  turkSetAssignmentID();
-
-  document.getElementById('mturk_form').addEventListener('submit', function() {
-    finishTask();
-  });
-};
-  </script>
-
-  <script>
 window.taskPoolerAddress = "${taskPoolerAddress}";
 window.taskSetId = "${taskGroupId}";
+window.platformType = 'MTurk';
   </script>
   <script src="${assignmentProgramUrl}"></script>
 </body>

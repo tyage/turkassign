@@ -31,7 +31,20 @@ const finishTask = () => {
   // TODO: notify task is finished
 };
 
+const finishTaskAssginment = () => {
+  switch (window.platformType) {
+    case 'MTurk':
+      turkSetAssignmentID();
+
+      $('#mturk_form').submit(() => {
+        finishTask();
+      });
+      break;
+  }
+};
+
 export {
   reserveTasks,
-  fetchAvailableTaskSet
+  fetchAvailableTasks,
+  finishTaskAssginment
 };
