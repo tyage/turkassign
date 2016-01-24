@@ -5,6 +5,7 @@ import multer from 'multer';
 import fs from 'fs';
 import { createTasks, getTasks } from './repositories/task';
 import { createAssignment, finishAssignment } from './repositories/assignment';
+import uuid from 'node-uuid';
 
 const mult = multer({ dest: './uploads/' });
 const app = express();
@@ -13,8 +14,7 @@ const server = http.Server(app);
 server.listen(process.env.PORT || 80);
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/static', express.static('public/dist'));
-app.use('/algorithm', express.static('algorithm'));
+app.use('/public', express.static('public'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -22,29 +22,43 @@ app.use(function(req, res, next) {
 });
 
 /*
-  PUT /set
-    tasks: data of tasks
-    algorithm: algorithm files
+  PUT /upload
+    file: uploaded file
 
   return:
     id of task group
 */
-const formOnSet = mult.fields([
-  { name: 'tasks' },
-  { name: 'algorithm' },
+const uploadForm = mult.fields([
+  { name: 'file' },
 ]);
-// TODO: algorithmとtasksを分離
-app.put('/set', formOnSet, (req, res) => {
+app.put('/upload', uploadForm, (req, res) => {
+  const { file } = req.files;
+
+  if (file || file.length === 0) {
+    return;
+  }
+
+  const fileId = uuid();
+  const path = file[0].path;
+  const filename = `${fileId}.js`;
+  fs.rename(path, `./public/uploads/${filename}`);
+  res.json({
+    filename
+  });
+});
+
+/*
+  PUT /set
+    tasks: data of tasks
+
+  return:
+    id of task group
+*/
+app.put('/set', (req, res) => {
   const { tasks } = req.body;
   const groupId = createTaskGroup(JSON.parse(tasks));
   console.log(`taskGroup ${groupId} was created`);
   console.log(tasks);
-
-  const { algorithm } = req.files;
-  if (algorithm) {
-    const path = algorithm[0].path;
-    fs.rename(path, `./algorithm/${id}.js`);
-  }
 
   res.json({
     groupId
