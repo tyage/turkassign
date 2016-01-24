@@ -1,5 +1,5 @@
 {
-  "name": "task-pooler-client",
+  "name": "task-pooler-requester-helper",
   "version": "1.0.0",
   "description": "",
   "main": "lib/main.js",

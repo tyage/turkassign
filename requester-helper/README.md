@@ -1,4 +1,4 @@
-# Task pooler client
+# Task pooler helper for requester
 
 ## What is this?
 
