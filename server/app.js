@@ -1,10 +1,10 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
-import uuid from 'node-uuid';
 import multer from 'multer';
 import fs from 'fs';
-import { createTasks, getTasks } from './task-repository';
+import { createTasks, getTasks } from './repositories/task';
+import { createAssignment, finishAssignment } from './repositories/assignment';
 
 const mult = multer({ dest: './uploads/' });
 const app = express();
@@ -52,15 +52,17 @@ app.put('/set', formOnSet, (req, res) => {
 });
 
 /*
-  POST /reserve
-    ids: list of id of tasks
+  POST /assign
+    taskIds: list of id of tasks
 
   return:
-    tasks
+    assignments
 */
-app.post('/reserve', (req, res) => {
-  const { ids } = req.body;
-  const tasks = getTasks(ids);
+app.post('/assign', (req, res) => {
+  const { taskIds } = req.body;
+  const tasks = getTasks(taskIds);
+  // TODO: get workerId from cookie
+  const workerId = 1;
 
   // check if there is any task that runs out of its budget
   const noBudgetTask = tasks.find(task => {
@@ -71,37 +73,36 @@ app.post('/reserve', (req, res) => {
     return;
   }
 
-  // TODO: call reserve function of repository and watch for limit times
-  tasks.forEach(task => {
-    --task.budget;
+  const assignments = tasks.map(task => {
+    return createAssignment(task.id, workerId);
   });
-  console.log(`tasks ${ids.join(',')} was reserved`);
+  console.log(`tasks ${taskIds.join(',')} was assigned to ${workerId}`);
 
   res.json({
-    tasks
+    assignments
   });
 });
 
 /*
-  POST /unreserve
-    ids: list of id of tasks
+  POST /finish
+    assignmentIds: list of id of assignments
 
   return:
-    tasks
+    assignments
 */
-app.post('/unreserve', (req, res) => {
-  const { ids } = req.body;
+app.post('/finish', (req, res) => {
+  const { assignmentIds } = req.body;
   const tasks = getTasks(ids);
+  // TODO: get workerId from cookie
+  const workerId = 1;
 
-  // TODO: call unreserve function of repository and watch for limit times
-  tasks.forEach(task => {
-    ++task.budget;
+  const assignments = assignmentIds.map(assignmentId => {
+    return finishAssignment(assignmentId);
   });
-
-  console.log(`task ${ids.join(',')} was unreserved`);
+  console.log(`assignments ${assignmentIds.join(',')} was finished by ${workerId}`);
 
   res.json({
-    tasks
+    assignments
   });
 });
 

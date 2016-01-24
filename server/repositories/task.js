@@ -1,3 +1,5 @@
+import uuid from 'node-uuid';
+
 /*
 taskRepository = {
   groupId: [
@@ -20,6 +22,7 @@ const createTaskGroup = tasks => {
   taskRepository[groupId] = tasks;
   return id;
 };
+
 const getAllTasks = () => taskRepository;
 const getTaskGroup = groupId => taskRepository[groupId] || null;
 const getTasks = ids => {
