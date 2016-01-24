@@ -56,8 +56,8 @@ app.put('/upload', uploadForm, (req, res) => {
 */
 app.put('/set', (req, res) => {
   const { tasks } = req.body;
-  const groupId = createTaskGroup(JSON.parse(tasks));
-  console.log(`taskGroup ${groupId} was created`);
+  const taskGroupId = createTaskGroup(JSON.parse(tasks));
+  console.log(`taskGroup ${taskGroupId} was created`);
   console.log(tasks);
 
   res.json({
