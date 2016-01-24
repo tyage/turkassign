@@ -6,12 +6,26 @@ class TaskPooler {
   getEndpoint() {
     return config.get('taskPoolerAddress');
   }
-  setTasksAndAlgorithm(taskSet, algorithm) {
-    const form = new FormData();
-    form.append('taskSet', JSON.stringify(taskSet));
-    form.append('algorithm', algorithm);
+  setTasks(tasks) {
+    const params = {
+      tasks: JSON.stringify(tasks)
+    };
+    const param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
 
     return fetch(`${this.getEndpoint()}/set`, {
+      method: 'PUT',
+      body: param,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(res => {
+      return res.json();
+    });
+  }
+  uploadFile(file) {
+    const form = new FormData();
+    form.append('file', file);
+    return fetch(`${this.getEndpoint()}/upload`, {
       method: 'PUT',
       body: form,
       headers: form.getHeaders()
