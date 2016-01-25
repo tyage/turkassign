@@ -1,8 +1,8 @@
 {
-  "name": "task-pooler-server",
+  "name": "turkassign-task-pool",
   "version": "1.0.0",
-  "description": "## What is this?",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "start": "`npm bin`/babel-node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"

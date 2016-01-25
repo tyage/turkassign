@@ -1,5 +1,5 @@
 {
-  "name": "task-pooler-requester-helper",
+  "name": "turkassign-requester",
   "version": "1.0.0",
   "description": "",
   "main": "lib/main.js",

@@ -1,8 +1,8 @@
 # Sample task assignment program
 
-Assign a task using Task pooler.
+Assign a task using Turkassign.
 
-Default assignment algorithm is random assignment.
+Assignment algorithm is random assignment.
 
 Run with:
 

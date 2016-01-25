@@ -19,7 +19,7 @@
     "gulp-util": "^3.0.7",
     "jquery": "^2.2.0",
     "lodash": "^3.10.1",
-    "task-pooler-assignment-helper": "file:../assignment-helper",
+    "turkassign-browser": "file:../browser",
     "webpack-stream": "^3.1.0"
   }
 }

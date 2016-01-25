@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import taskTemplate from './task-template';
-import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'task-pooler-assignment-helper';
+import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'turkassign-browser';
 
 /*
 tasks = [

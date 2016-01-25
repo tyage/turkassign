@@ -1,4 +1,4 @@
-# Task pooler helper for assignment
+# Turkassign library for browser
 
 It provides some functions that communicate to task pooler
 

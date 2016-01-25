@@ -1,4 +1,4 @@
-# Task pooler server
+# Turkassign task pool
 
 ## What is this?
 
