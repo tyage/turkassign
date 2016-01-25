@@ -18,15 +18,16 @@ const fetchAvailableTasks = taskGroupId => {
 // reserve tasks
 const reserveTasks = tasks => {
   const taskIds = _.map(tasks, task => task.id);
-  return assignTasks(taskIds).then((res) => {
+  return assignTasks(taskIds).then(res => {
     const newAssignments = res.assignments;
     _.each(newAssignments, assignment => {
       assignments.push(assignment);
     });
+    return newAssignments;
   });
 };
 
-// ページから離脱する場合に、確保したtaskを返却する
+// ページから離脱する場合に、割当てを解除する
 const unreserveTasks = () => {
   if (assignments.length > 0) {
     cancelAssignments(_.map(assignments, assignment => assignment.id));
@@ -34,9 +35,10 @@ const unreserveTasks = () => {
 };
 $(window).on('beforeunload', unreserveTasks);
 
-// タスクが完了した場合は、taskを返却する必要はない
 const finishTask = () => {
+  // タスクが完了した場合は、割当てを解除する必要はない
   $(window).off('beforeunload', unreserveTasks);
+
   if (assignments.length > 0) {
     finishAssignments(_.map(assignments, assignment => assignment.id));
   }

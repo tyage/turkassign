@@ -13,10 +13,9 @@ class MTurk {
   }
 
   createHIT(taskGroupId, assignmentProgram, apiParams = {}) {
-    const taskPoolAddress = config.get('taskPoolAddress');
-
     return uploadFile(assignmentProgram).then(res => {
       const { filename } = res;
+      const taskPoolAddress = config.get('taskPoolAddress');
       const assignmentProgramUrl = `${taskPoolAddress}/${filename}`;
 
       const question = questionTemplate(taskGroupId, assignmentProgramUrl);

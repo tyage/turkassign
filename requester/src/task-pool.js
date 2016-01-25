@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
+import querystring from 'querystring';
 import config from './config';
 
 class TaskPool {
@@ -7,14 +8,11 @@ class TaskPool {
     return config.get('taskPoolAddress');
   }
   setTasks(tasks) {
-    const params = {
-      tasks: JSON.stringify(tasks)
-    };
-    const param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
-
     return fetch(`${this.getEndpoint()}/set`, {
       method: 'PUT',
-      body: param,
+      body: querystring.stringify({
+        tasks: JSON.stringify(tasks)
+      }),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }

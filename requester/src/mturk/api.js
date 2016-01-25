@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import querystring from 'querystring';
 import fetch from 'node-fetch';
 import { loadXML } from './parser';
 
@@ -33,11 +34,9 @@ class API {
     params.Signature = generateHmac(`${params.Service}${params.Operation}${params.Timestamp}`,
       this.api.awsSecretAccessKey);
 
-    const param = Object.keys(params).map((k) => `${k}=${encodeURIComponent(params[k])}`).join('&');
-
     return fetch(this.api.endpoint, {
       method: 'POST',
-      body: param,
+      body: querystring.stringify(params),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
