@@ -4,7 +4,7 @@ if (!window || !window.document) {
 
 import $ from 'jquery';
 import _ from 'lodash';
-import { assignTasks, fetchTaskGroup, finishAssignments, cancelAssignments } from './task-pooler';
+import { assignTasks, fetchTaskGroup, finishAssignments, cancelAssignments } from './task-pool';
 
 const assignments = [];
 

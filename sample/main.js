@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { taskPooler, MTurk } from '../requester-helper/src/main';
+import { taskPool, MTurk } from '../requester-helper/src/main';
 import tasks from './tasks';
 
 // assignment algorithm should be compiled because it will be run by worker's browser
@@ -10,8 +10,8 @@ const mturk = new MTurk({
   awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-// set the tasks and assignment algorithm to task pooler
-taskPooler.setTasks(tasks).then(res => {
+// set the tasks and assignment algorithm to task pool
+taskPool.setTasks(tasks).then(res => {
   const { taskGroupId } = res;
 
   // create a HIT with taskGroupId and assignmentProgram

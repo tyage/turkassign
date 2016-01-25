@@ -1,6 +1,6 @@
 # Turkassign library for browser
 
-It provides some functions that communicate to task pooler
+It provides some functions that communicate to task pool
 
 - `reserveTasks([ taskIds ])`
     - you should call this when you reserve tasks

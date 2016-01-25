@@ -1,5 +1,5 @@
 import MTurk from './mturk/mturk';
-import taskPooler from './task-pooler';
+import taskPool from './task-pool';
 import config from './config';
 
-export { MTurk, taskPooler, config };
+export { MTurk, taskPool, config };

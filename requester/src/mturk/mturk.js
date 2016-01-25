@@ -1,10 +1,10 @@
 import API from './api';
 import { generateQuestionXML, questionTemplate } from './question';
-import taskPooler from '../task-pooler';
+import taskPool from '../task-pool';
 import config from '../config';
 
 const uploadFile = file => {
-  return taskPooler.uploadFile(file);
+  return taskPool.uploadFile(file);
 };
 
 class MTurk {
@@ -13,11 +13,11 @@ class MTurk {
   }
 
   createHIT(taskGroupId, assignmentProgram, apiParams = {}) {
-    const taskPoolerAddress = config.get('taskPoolerAddress');
+    const taskPoolAddress = config.get('taskPoolAddress');
 
     return uploadFile(assignmentProgram).then(res => {
       const { filename } = res;
-      const assignmentProgramUrl = `${taskPoolerAddress}/${filename}`;
+      const assignmentProgramUrl = `${taskPoolAddress}/${filename}`;
 
       const question = questionTemplate(taskGroupId, assignmentProgramUrl);
       const questionXML = generateQuestionXML(question);

@@ -1,7 +1,7 @@
 import config from '../config';
 
 const questionTemplate = (taskGroupId, assignmentProgramUrl) => {
-  const taskPoolerAddress = config.get('taskPoolerAddress');
+  const taskPoolAddress = config.get('taskPoolAddress');
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +14,8 @@ const questionTemplate = (taskGroupId, assignmentProgramUrl) => {
 
   <script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
   <script>
-window.taskPoolerAddress = "${taskPoolerAddress}";
-window.taskGroupId = "${taskGroupId}";
+window.taskPoolAddress = '${taskPoolAddress}';
+window.taskGroupId = '${taskGroupId}';
 window.platformType = 'MTurk';
   </script>
   <script src="${assignmentProgramUrl}"></script>

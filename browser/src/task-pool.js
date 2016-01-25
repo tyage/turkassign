@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-// taskPoolerAddressは埋め込まれたaddressから取ってくる
-const endpoint = window.taskPoolerAddress;
+// taskPoolAddressは埋め込まれたaddressから取ってくる
+const endpoint = window.taskPoolAddress;
 
 const assignTasks = taskIds => {
   return $.ajax({

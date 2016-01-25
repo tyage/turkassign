@@ -2,9 +2,9 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import config from './config';
 
-class TaskPooler {
+class TaskPool {
   getEndpoint() {
-    return config.get('taskPoolerAddress');
+    return config.get('taskPoolAddress');
   }
   setTasks(tasks) {
     const params = {
@@ -35,4 +35,4 @@ class TaskPooler {
   }
 }
 
-export default new TaskPooler();
+export default new TaskPool();
