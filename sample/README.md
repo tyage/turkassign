@@ -15,9 +15,9 @@ $ AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=XXX npm start
 ```javascript
 import $ from 'jquery';
 import taskTemplate from './task-template';
-import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'task-pooler-assignment-helper';
+import turkassign from 'turkassign-browser';
 
-fetchAvailableTasks().then(tasks => {
+turkassign.fetchAvailableTasks().then(tasks => {
   // if there is no more tasks, finish the assignment
   if (tasks.length === 0) {
     return;
@@ -26,12 +26,12 @@ fetchAvailableTasks().then(tasks => {
   // select a task from taskSet
   const index = parseInt(Math.random() * tasks.length);
   const selectedTask = tasks[index];
-  reserveTasks([ selectedTask ]);
+  turkassign.reserveTasks([ selectedTask ]);
 
   // show task page
   $('#content').html(taskTemplate(selectedTask.data));
 
   // finish task assignment
-  finishTaskAssginment();
+  turkassign.finishTaskAssginment();
 });
 ```

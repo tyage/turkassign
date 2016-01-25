@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import taskTemplate from './task-template';
-import { fetchAvailableTasks, reserveTasks, finishTaskAssginment } from 'turkassign-browser';
+import turkassign from 'turkassign-browser';
 
 /*
 tasks = [
@@ -12,16 +12,16 @@ tasks = [
 ]
 */
 
-fetchAvailableTasks().then(tasks => {
+turkassign.fetchAvailableTasks().then(tasks => {
   if (tasks.length === 0) {
     return;
   }
 
   const index = parseInt(Math.random() * tasks.length);
   const selectedTask = tasks[index];
-  reserveTasks([ selectedTask ]);
+  turkassign.reserveTasks([ selectedTask ]);
 
   $('#content').html(taskTemplate(selectedTask.data));
 
-  finishTaskAssginment();
+  turkassign.finishTaskAssginment();
 });

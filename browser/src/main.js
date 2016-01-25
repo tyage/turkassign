@@ -60,6 +60,10 @@ const turkassign = {
   finishTaskAssginment
 };
 
-// expose object
-window.turkassign = turkassign;
-export turkassign;
+if (typeof module === "object" && typeof module.exports === "object") {
+  // expose object for CommonJS
+  export default turkassign;
+} else {
+  // expose object for global
+  window.turkassign = turkassign;
+}
