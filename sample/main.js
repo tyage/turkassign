@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { taskPool, MTurk } from '../requester-helper/src/main';
+import { taskPool, MTurk } from '../requester/src/main';
 import tasks from './tasks';
 
 // assignment algorithm should be compiled because it will be run by worker's browser
