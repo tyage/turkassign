@@ -1,10 +1,10 @@
-if (!window || !window.document) {
-  throw new Error('turkassign requires a window');
-}
-
 import $ from 'jquery';
 import _ from 'lodash';
 import { assignTasks, fetchTaskGroup, finishAssignments, cancelAssignments } from './task-pool';
+
+if (!window || !window.document) {
+  throw new Error('turkassign requires a window');
+}
 
 const assignments = [];
 
@@ -54,16 +54,8 @@ const finishTaskAssginment = () => {
   }
 };
 
-const turkassign = {
+export default {
   reserveTasks,
   fetchAvailableTasks,
   finishTaskAssginment
 };
-
-if (typeof module === "object" && typeof module.exports === "object") {
-  // expose object for CommonJS
-  export default turkassign;
-} else {
-  // expose object for global
-  window.turkassign = turkassign;
-}
