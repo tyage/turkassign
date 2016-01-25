@@ -1,9 +1,9 @@
-# Task pooler
+# Turkassign
 
-It helps to manage tasks apart from microtask platforms.
+It helps to assign tasks on crowdsourcing platforms by managing tasks apart from platforms.
 
 It contains
 
-- [Server](./server)
-- [Requester helper](./requester-helper)
-- [Assignment helper](./assignment-helper)
+- [Task pool](./task-pool)
+- [Requester](./requester)
+- [Browser](./browser)
