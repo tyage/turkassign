@@ -1,3 +1,7 @@
+if (!window || !window.document) {
+  throw new Error('turkassign requires a window');
+}
+
 import $ from 'jquery';
 import _ from 'lodash';
 import { assignTasks, fetchTaskGroup, finishAssignments, cancelAssignments } from './task-pooler';
@@ -50,8 +54,12 @@ const finishTaskAssginment = () => {
   }
 };
 
-export {
+const turkassign = {
   reserveTasks,
   fetchAvailableTasks,
   finishTaskAssginment
 };
+
+// expose object
+window.turkassign = turkassign;
+export turkassign;
