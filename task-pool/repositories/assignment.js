@@ -9,7 +9,6 @@ assignmentRepository = [
 
 assignment = {
   taskId: id of task,
-  workerId: id of worker
   createdAt: time when assigned,
   status: assignment status
 }
@@ -41,7 +40,7 @@ const watchTaskAssignment = () => {
 };
 setInterval(watchTaskAssignment, 1000);
 
-const createAssignment = (taskId, workerId) => {
+const createAssignment = (taskId) => {
   const task = getTask(taskId);
   if (task === null) {
     return;
@@ -52,7 +51,6 @@ const createAssignment = (taskId, workerId) => {
   const assignment = {
     id,
     taskId,
-    workerId,
     createdAt: new Date(),
     status: statuses.ASSIGNED
   };
@@ -79,11 +77,10 @@ const timeoutAssignment = id => {
   return assignment;
 };
 
-const finishAssignment = (id, workerId) => {
+const finishAssignment = (id) => {
   const assignment = getAssignment(id);
   if (assignment === null ||
-    assignment.status !== statuses.ASSIGNED ||
-    assignment.workerId !== workerId) {
+    assignment.status !== statuses.ASSIGNED) {
     return;
   }
 
@@ -92,11 +89,10 @@ const finishAssignment = (id, workerId) => {
   return assignment;
 };
 
-const cancelAssignment = (id, workerId) => {
+const cancelAssignment = (id) => {
   const assignment = getAssignment(id);
   if (assignment === null ||
-    assignment.status !== statuses.ASSIGNED ||
-    assignment.workerId !== workerId) {
+    assignment.status !== statuses.ASSIGNED) {
     return;
   }
 

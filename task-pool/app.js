@@ -76,8 +76,6 @@ app.put('/set', (req, res) => {
 app.post('/assign', (req, res) => {
   const { taskIds } = req.body;
   const tasks = getTasks(taskIds);
-  // TODO: get workerId from cookie
-  const workerId = 1;
 
   // check if there is any task that runs out of its budget
   const noBudgetTask = tasks.find(task => {
@@ -89,9 +87,9 @@ app.post('/assign', (req, res) => {
   }
 
   const assignments = tasks.map(task => {
-    return createAssignment(task.id, workerId);
+    return createAssignment(task.id);
   });
-  console.log(`tasks ${taskIds.join(',')} is assigned to ${workerId}`);
+  console.log(`tasks ${taskIds.join(',')} is assigned`);
 
   res.json({
     assignments
@@ -107,17 +105,15 @@ app.post('/assign', (req, res) => {
 */
 app.post('/finish', (req, res) => {
   const { assignmentIds } = req.body;
-  // TODO: get workerId from cookie
-  const workerId = 1;
 
   if (!assignmentIds) {
     return;
   }
 
   const assignments = assignmentIds.map(assignmentId => {
-    return finishAssignment(assignmentId, workerId);
+    return finishAssignment(assignmentId);
   });
-  console.log(`assignments ${assignmentIds.join(',')} is finished by ${workerId}`);
+  console.log(`assignments ${assignmentIds.join(',')} is finished`);
 
   res.json({
     assignments
@@ -133,17 +129,15 @@ app.post('/finish', (req, res) => {
 */
 app.post('/cancel', (req, res) => {
   const { assignmentIds } = req.body;
-  // TODO: get workerId from cookie
-  const workerId = 1;
 
   if (!assignmentIds) {
     return;
   }
 
   const assignments = assignmentIds.map(assignmentId => {
-    return cancelAssignment(assignmentId, workerId);
+    return cancelAssignment(assignmentId);
   });
-  console.log(`assignments ${assignmentIds.join(',')} is canceled by ${workerId}`);
+  console.log(`assignments ${assignmentIds.join(',')} is canceled`);
 
   res.json({
     assignments
