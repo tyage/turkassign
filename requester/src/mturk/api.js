@@ -43,7 +43,6 @@ class API {
     })
       .then(res => res.text())
       .then(text => {
-        console.log(text); // TODO: use general logger
         return loadXML(text);
       });
   }
