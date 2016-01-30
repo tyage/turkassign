@@ -1,5 +1,7 @@
 'use strict';
 
+require('electron-compile').init('./', './main.js');
+
 const electron = require('electron');
 // Module to control application life.
 const app = electron.app;

@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "electron-compile": "^2.0.6"
+  },
   "devDependencies": {
+    "electron-compilers": "^2.0.6",
     "electron-prebuilt": "^0.36.7"
   },
   "scripts": {
