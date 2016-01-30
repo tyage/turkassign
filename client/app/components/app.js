@@ -1,18 +1,17 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
-import Config from './config';
+import Settings from './settings';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div>
-        <Config />
+      <div className="window">
+        <div className="window-content">
+          <Settings />
+        </div>
       </div>
     );
   }
 }
-
-ReactDOM.render(<App />, document.querySelector('#app'));
