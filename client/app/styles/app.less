@@ -1,5 +1,7 @@
 @import "../../node_modules/photon/dist/css/photon.css";
 
+@settings-height: 200px;
+
 .form-section {
   margin: 10px 0;
   label {
@@ -18,6 +20,10 @@
 }
 
 #settings {
-  height: 200px;
+  height: @settings-height;
   border-bottom: 1px solid #ddd;
+}
+
+#main-content {
+  margin-top: @settings-height;
 }
