@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import Config from './config';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Config />
       </div>
     );
   }
