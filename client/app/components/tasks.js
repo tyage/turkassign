@@ -34,7 +34,7 @@ export default class Algorithm extends React.Component {
   onAddTask() {
     ++nextId;
     this.state.tasks.push({
-      limit: 0,
+      budget: 0,
       content: '',
       id: nextId
     });
@@ -50,9 +50,9 @@ export default class Algorithm extends React.Component {
               onClick={ this.onDeleteTask.bind(this, i) }>Delete this</button>
           </header>
           <div className="form-section">
-            <label>Limit</label>
-            <input type="number" defaultValue={ task.limit }
-              onChange={ this.onTaskChange.bind(this, i, 'limit') } />
+            <label>Budget</label>
+            <input type="number" defaultValue={ task.budget }
+              onChange={ this.onTaskChange.bind(this, i, 'budget') } />
           </div>
           <div className="form-section">
             <label>Content</label>
