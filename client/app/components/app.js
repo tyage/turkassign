@@ -1,5 +1,6 @@
 import React from 'react';
 import SettingsWindow from './settings-window';
+import ResultWindow from './result-window';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,9 +10,13 @@ export default class App extends React.Component {
       currentWindow: 'settings'
     };
   }
-  onPostHIT() {
+  onPostHIT(settings) {
+    // XXX: post hit with current settings
+    const result = {};
+
     this.setState({
-      currentWindow: 'result'
+      currentWindow: 'result',
+      result
     });
   }
   render() {
@@ -20,7 +25,7 @@ export default class App extends React.Component {
         return <SettingsWindow onPostHIT={ this.onPostHIT.bind(this) } />;
         break;
       case 'result':
-        return <ResultWindow />;
+        return <ResultWindow settings={ this.state.settings } />;
         break;
     }
   }

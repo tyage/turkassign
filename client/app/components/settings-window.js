@@ -1,23 +1,29 @@
 import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
+import NavGroups from './nav-groups';
+
+const defaultActiveNavItem = 'config';
 
 export default class SettingsWindow extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      settingTab: 'config'
+      activeNavItem: defaultActiveNavItem
     };
   }
-  changeSettingTab(tab) {
+  onNavItemChange(item) {
     this.setState({
-      settingTab: tab
+      activeNavItem: item
     });
   }
+  onPostHIT() {
+    this.props.onPostHIT();
+  }
   render() {
-    const showSettingContent = () => {
-      switch (this.state.settingTab) {
+    const showContent = () => {
+      switch (this.state.activeNavItem) {
         case 'config':
           return <Config />;
           break;
@@ -29,31 +35,23 @@ export default class SettingsWindow extends React.Component {
           break;
       }
     };
-    const SettingsItem = ({ name, title }) => {
-      const classNames = ['nav-group-item'];
-      if (this.state.settingTab === name) {
-        classNames.push('active');
-      }
-      return (
-        <div className={ classNames.join(' ') }
-          onClick={ this.changeSettingTab.bind(this, name) }>{ title }</div>
-      );
+
+    const navGroups = {
+      'Settings': [
+        { name: 'config', title: 'Config' },
+        { name: 'algorithm', title: 'Algorithm' },
+        { name: 'tasks', title: 'Tasks' },
+      ]
     };
 
     return (
       <div className="window">
         <div className="window-content">
-          <div className="pane-group" id="settings">
-            <div className="pane-sm sidebar">
-              <div className="nav-group">
-                <h5 className="nav-group-title">Settings</h5>
-                <SettingsItem name="config" title="Config" />
-                <SettingsItem name="algorithm" title="Algorithm" />
-                <SettingsItem name="tasks" title="Tasks" />
-              </div>
-            </div>
+          <div className="pane-group">
+            <NavGroups groups={ navGroups } onItemChange={ this.onNavItemChange.bind(this) }
+              defaultItem={ defaultActiveNavItem } />
             <div className="pane">
-              { showSettingContent() }
+              { showContent() }
             </div>
           </div>
         </div>
@@ -64,7 +62,7 @@ export default class SettingsWindow extends React.Component {
             </button>
 
             <button className="btn btn-primary pull-right"
-              onClick={ this.props.onPostHIT }>
+              onClick={ this.onPostHIT.bind(this) }>
               Post
             </button>
           </div>
