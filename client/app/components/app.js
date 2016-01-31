@@ -1,21 +1,27 @@
 import React from 'react';
-import Settings from './settings';
-import PostForm from './post-form';
+import SettingsWindow from './settings-window';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentWindow: 'settings'
+    };
+  }
+  onPostHIT() {
+    this.setState({
+      currentWindow: 'result'
+    });
   }
   render() {
-    return (
-      <div className="window">
-        <div className="window-content">
-          <Settings />
-          <div id="main-content">
-            <PostForm />
-          </div>
-        </div>
-      </div>
-    );
+    switch (this.state.currentWindow) {
+      case 'settings':
+        return <SettingsWindow onPostHIT={ this.onPostHIT.bind(this) } />;
+        break;
+      case 'result':
+        return <ResultWindow />;
+        break;
+    }
   }
 }
