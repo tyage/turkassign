@@ -1,63 +1,57 @@
 import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
+import NavGroups from './nav-groups';
+
+const defaultActiveNavItem = 'hitResult';
 
 export default class ResultWindow extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      settingTab: 'config'
+      activeNavItem: defaultActiveNavItem
     };
   }
-  changeSettingTab(tab) {
+  onNavItemChange(item) {
     this.setState({
-      settingTab: tab
+      activeNavItem: item
     });
   }
   render() {
-    const showSettingContent = () => {
-      switch (this.state.settingTab) {
+    const showContent = () => {
+      switch (this.state.activeNavItem) {
         case 'config':
-          return <Config />;
+          return <Config editable={ false } />;
           break;
         case 'algorithm':
-          return <Algorithm />;
+          return <Algorithm editable={ false } />;
           break;
         case 'tasks':
           return 1;
           break;
       }
     };
-    const NavItem = ({ name, title, on }) => {
-      const classNames = ['nav-group-item'];
-      if (this.state.settingTab === name) {
-        classNames.push('active');
-      }
-      return (
-        <div className={ classNames.join(' ') }
-          onClick={ this.changeNavItem.bind(this, name) }>{ title }</div>
-      );
+
+    const navGroups = {
+      'Settings': [
+        { name: 'config', title: 'Config' },
+        { name: 'algorithm', title: 'Algorithm' },
+        { name: 'tasks', title: 'Tasks' },
+      ],
+      'Result': [
+        { name: 'hitResult', title: 'HIT Result' },
+      ]
     };
 
     return (
       <div className="window">
         <div className="window-content">
-          <div className="pane-group" id="settings">
-            <div className="pane-sm sidebar">
-              <div className="nav-group">
-                <h5 className="nav-group-title">Settings</h5>
-                <NavItem name="config" title="Config" />
-                <NavItem name="algorithm" title="Algorithm" />
-                <NavItem name="tasks" title="Tasks" />
-              </div>
-              <div className="nav-group">
-                <h5 className="nav-group-title">Result</h5>
-                <NavItem name="config" title="Config" />
-              </div>
-            </div>
+          <div className="pane-group">
+            <NavGroups groups={ navGroups } onItemChange={ this.onNavItemChange.bind(this) }
+              defaultItem={ defaultActiveNavItem } />
             <div className="pane">
-              { showSettingContent() }
+              { showContent() }
             </div>
           </div>
         </div>

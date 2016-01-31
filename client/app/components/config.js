@@ -1,44 +1,47 @@
 import React from 'react';
 import ConfigService from '../services/config';
 
+const configItems = [
+  {
+    label: 'AWS Access Key ID',
+    placeholder: 'AWS Access Key ID',
+    key: 'awsAccessKeyId'
+  },
+  {
+    label: 'AWS Secret Access Key',
+    placeholder: 'AWS Secret Access Key',
+    key: 'awsSecretAccessKey'
+  },
+  {
+    label: 'MTurk Endpoint',
+    placeholder: 'Amazon Mechanical Turk API Endpoint',
+    key: 'mturkEndpoint'
+  },
+  {
+    label: 'Address of Task Pool',
+    placeholder: 'Address of Task Pool',
+    key: 'taskPoolAddress'
+  }
+];
+
 export default class Config extends React.Component {
-  onConfigChange() {
-    ConfigService.set('awsAccessKeyId', this.refs.awsAccessKeyId.value);
-    ConfigService.set('awsSecretAccessKey', this.refs.awsSecretAccessKey.value);
-    ConfigService.set('mturkEndpoint', this.refs.mturkEndpoint.value);
-    ConfigService.set('taskPoolAddress', this.refs.taskPoolAddress.value);
+  onConfigChange(key, e) {
+    ConfigService.set(key, e.target.value);
   }
   render() {
+    const itemElems = configItems.map((item, i) => {
+      return (
+        <div className="form-section" key={ i }>
+          <label>{ item.label }</label>
+          <input type="text" placeholder={ item.placeholder }
+            onChange={ this.onConfigChange.bind(this, item.key) }
+            defaultValue={ ConfigService.get(item.key) } />
+        </div>
+      );
+    });
     return (
       <div id="config-form">
-        <div className="form-section">
-          <label>AWS Access Key ID</label>
-          <input type="text" placeholder="AWS Access Key ID"
-            ref="awsAccessKeyId"
-            onChange={ this.onConfigChange.bind(this) }
-            defaultValue={ ConfigService.get('awsAccessKeyId') } />
-        </div>
-        <div className="form-section">
-          <label>AWS Secret Access Key</label>
-          <input type="password" placeholder="AWS Secret Access Key"
-            ref="awsSecretAccessKey"
-            onChange={ this.onConfigChange.bind(this) }
-            defaultValue={ ConfigService.get('awsSecretAccessKey') } />
-        </div>
-        <div className="form-section">
-          <label>MTurk Endpoint</label>
-          <input type="text" placeholder="Amazon Mechanical Turk API Endpoint"
-            ref="mturkEndpoint"
-            onChange={ this.onConfigChange.bind(this) }
-            defaultValue={ ConfigService.get('mturkEndpoint') } />
-        </div>
-        <div className="form-section">
-          <label>Address of Task Pool</label>
-          <input type="text" placeholder="Address of Task Pool"
-            ref="taskPoolAddress"
-            onChange={ this.onConfigChange.bind(this) }
-            defaultValue={ ConfigService.get('taskPoolAddress') } />
-        </div>
+        { itemElems }
       </div>
     );
   }
