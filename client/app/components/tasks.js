@@ -1,6 +1,8 @@
 import React from 'react';
 import ConfigService from '../services/config';
 
+let nextId = 0;
+
 export default class Algorithm extends React.Component {
   constructor(props) {
     super(props);
@@ -8,29 +10,40 @@ export default class Algorithm extends React.Component {
     this.state = {
       tasks: ConfigService.get('tasks') || []
     };
+    this.state.tasks.forEach(task => {
+      if (task.id >= nextId) {
+        nextId = task.id + 1;
+      }
+    });
   }
-  onChange() {
+  updateTasks() {
+    const tasks = this.state.tasks;
+    this.setState({
+      tasks: tasks
+    });
+    ConfigService.set('tasks', tasks);
+  }
+  onTaskChange(i, key, e) {
+    this.state.tasks[i][key] = e.target.value;
+    this.updateTasks();
   }
   onDeleteTask(i) {
     this.state.tasks.splice(i, 1);
-    this.setState({
-      tasks: this.state.tasks
-    });
+    this.updateTasks();
   }
   onAddTask() {
+    ++nextId;
     this.state.tasks.push({
       limit: 0,
-      content: ''
+      content: '',
+      id: nextId
     });
-    this.setState({
-      tasks: this.state.tasks
-    });
+    this.updateTasks();
   }
   render() {
-
     const taskElems = this.state.tasks.map((task, i) => {
       return (
-        <section className="task-form" key={ i }>
+        <section className="task-form" key={ task.id }>
           <header>
             <h5>Task { i }</h5>
             <button className="btn btn-mini btn-negative"
@@ -38,13 +51,14 @@ export default class Algorithm extends React.Component {
           </header>
           <div className="form-section">
             <label>Limit</label>
-            <input type="text" />
+            <input type="number" defaultValue={ task.limit }
+              onChange={ this.onTaskChange.bind(this, i, 'limit') } />
           </div>
           <div className="form-section">
             <label>Content</label>
             <textarea rows="3" cols="80"
-              onChange={ this.onChange.bind(this) }
-              defaultValue={ ConfigService.get('algorithm') }
+              defaultValue={ task.content }
+              onChange={ this.onTaskChange.bind(this, i, 'content') }
               ></textarea>
           </div>
         </section>
