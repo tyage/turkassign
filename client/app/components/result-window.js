@@ -1,6 +1,7 @@
 import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
+import Tasks from './tasks';
 import NavGroups from './nav-groups';
 
 const defaultActiveNavItem = 'hitResult';
@@ -28,7 +29,7 @@ export default class ResultWindow extends React.Component {
           return <Algorithm disabled={ true } />;
           break;
         case 'tasks':
-          return 1;
+          return <Tasks />;
           break;
       }
     };

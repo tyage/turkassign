@@ -1,9 +1,9 @@
 class Config {
   get(key) {
-    return window.localStorage.getItem(key);
+    return JSON.parse(window.localStorage.getItem(key));
   }
   set(key, value) {
-    return window.localStorage.setItem(key, value);
+    return window.localStorage.setItem(key, JSON.stringify(value));
   }
 };
 

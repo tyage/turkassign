@@ -1,6 +1,7 @@
 import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
+import Tasks from './tasks';
 import NavGroups from './nav-groups';
 
 const defaultActiveNavItem = 'config';
@@ -31,7 +32,7 @@ export default class SettingsWindow extends React.Component {
           return <Algorithm />;
           break;
         case 'tasks':
-          return 1;
+          return <Tasks />;
           break;
       }
     };
