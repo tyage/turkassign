@@ -22,10 +22,10 @@ export default class ResultWindow extends React.Component {
     const showContent = () => {
       switch (this.state.activeNavItem) {
         case 'config':
-          return <Config editable={ false } />;
+          return <Config disabled={ true } />;
           break;
         case 'algorithm':
-          return <Algorithm editable={ false } />;
+          return <Algorithm disabled={ true } />;
           break;
         case 'tasks':
           return 1;

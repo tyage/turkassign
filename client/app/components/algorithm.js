@@ -9,7 +9,7 @@ export default class Algorithm extends React.Component {
       <div>
         <div className="form-section">
           <label>Assignment Algorithm</label>
-          <textarea rows="15" cols="60"></textarea>
+          <textarea rows="30" cols="80" disabled={ this.props.disabled }></textarea>
         </div>
       </div>
     );

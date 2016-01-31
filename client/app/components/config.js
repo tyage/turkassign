@@ -35,7 +35,8 @@ export default class Config extends React.Component {
           <label>{ item.label }</label>
           <input type="text" placeholder={ item.placeholder }
             onChange={ this.onConfigChange.bind(this, item.key) }
-            defaultValue={ ConfigService.get(item.key) } />
+            defaultValue={ ConfigService.get(item.key) }
+            disabled={ this.props.disabled } />
         </div>
       );
     });
