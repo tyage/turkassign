@@ -1,4 +1,4 @@
-let config = new Map();
+const config = new Map();
 
 const defaultConfig = {
   taskPoolAddress: 'https://task.mocos.kitchen' // call workerProxyServer.reconnect after change this

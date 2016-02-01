@@ -1,15 +1,27 @@
+const localStorage = window.localStorage;
+
 class Config {
   get(key) {
-    return JSON.parse(window.localStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key));
   }
   set(key, value) {
-    return window.localStorage.setItem(key, JSON.stringify(value));
+    return localStorage.setItem(key, JSON.stringify(value));
+  }
+  keys() {
+    return Object.keys(localStorage);
+  }
+  getItems() {
+    const items = {};
+    this.keys().forEach(key => {
+      items[key] = this.get(key);
+    });
+    return items;
   }
 };
 
-let config = new Config();
+const config = new Config();
 
-let defaultConfig = {
+const defaultConfig = {
   mturkEndpoint: 'https://mechanicalturk.sandbox.amazonaws.com',
   taskPoolAddress: 'https://task.mocos.kitchen',
 };
