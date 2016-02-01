@@ -10,7 +10,8 @@ const configItems = [
   {
     label: 'AWS Secret Access Key',
     placeholder: 'AWS Secret Access Key',
-    key: 'awsSecretAccessKey'
+    key: 'awsSecretAccessKey',
+    type: 'password'
   },
   {
     label: 'MTurk Endpoint',
@@ -33,7 +34,7 @@ export default class Config extends React.Component {
       return (
         <div className="form-section" key={ i }>
           <label>{ item.label }</label>
-          <input type="text" placeholder={ item.placeholder }
+          <input type={ item.type || 'text' } placeholder={ item.placeholder }
             onChange={ this.onConfigChange.bind(this, item.key) }
             defaultValue={ ConfigService.get(item.key) }
             disabled={ this.props.disabled } />
