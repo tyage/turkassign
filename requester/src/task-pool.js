@@ -20,6 +20,11 @@ class TaskPool {
       return res.json();
     });
   }
+  getTasks(taskGroupId) {
+    return fetch(`${this.getEndpoint()}/list/${taskGroupId}`).then(res => {
+      return res.json();
+    });
+  }
   uploadFile(file) {
     const form = new FormData();
     form.append('file', file);

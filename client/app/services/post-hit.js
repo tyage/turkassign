@@ -1,21 +1,27 @@
 import stream from 'stream';
 import { taskPool, MTurk, config } from '../../../requester/src/main';
+import fs from 'fs';
 
 // post hit with current config
-const postHIT = (config) => {
+const postHIT = (setting) => {
   const mturk = new MTurk({
-    awsAccessKeyId: config.awsAccessKeyId,
-    awsSecretAccessKey: config.awsSecretAccessKey
+    awsAccessKeyId: setting.awsAccessKeyId,
+    awsSecretAccessKey: setting.awsSecretAccessKey,
+    endpoint: setting.mturkEndpoint
   });
-  return taskPool.setTasks(config.tasks).then(res => {
+
+  config.set('taskPoolAddress', setting.taskPoolAddress);
+
+  return taskPool.setTasks(setting.tasks).then(res => {
     const { taskGroupId } = res;
 
     // create stream from text
-    // http://stackoverflow.com/questions/12755997/how-to-create-streams-from-string-in-node-js
     const assignmentProgram = new stream.Readable();
-    assignmentProgram._read = () => {};
-    assignmentProgram.push(config.assignmentProgram);
-    assignmentProgram.push(null);
+    assignmentProgram.pipe = (dest) => {
+      dest.write(setting.algorithm);
+      return dest;
+    };
+    assignmentProgram.path = 'algorithm.js';
 
     return mturk.createHIT(taskGroupId, assignmentProgram, {
       'Title': 'Estimate age of the photo',
