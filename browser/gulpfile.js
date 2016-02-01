@@ -4,8 +4,8 @@ var webpack = require('webpack-stream');
 var webpackConfig = require('./webpack.config.js');
 
 var config = {
-  src: 'assignment-src',
-  dist: 'assignment-dist'
+  src: 'src',
+  dist: 'lib'
 };
 
 gulp.task('js', function() {
