@@ -25,6 +25,11 @@ const postHIT = (config) => {
       'LifetimeInSeconds': 3600,
       'Reward.1.Amount': 0.02,
       'Reward.1.CurrencyCode': 'USD'
+    }).then(hitResult => {
+      return {
+        hitResult,
+        taskGroupId
+      };
     });
   });
 };

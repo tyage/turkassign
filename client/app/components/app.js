@@ -15,7 +15,6 @@ export default class App extends React.Component {
   onPostHIT() {
     const config = ConfigService.getItems();
     postHIT(config).then(result => {
-      console.log(result)
       this.setState({
         currentWindow: 'result',
         result

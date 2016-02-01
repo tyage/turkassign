@@ -2,6 +2,8 @@ import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
 import Tasks from './tasks';
+import HitResult from './hit-result';
+import TaskPool from './task-pool';
 import NavGroups from './nav-groups';
 
 const defaultActiveNavItem = 'hitResult';
@@ -31,6 +33,12 @@ export default class ResultWindow extends React.Component {
         case 'tasks':
           return <Tasks disabled={ true } />;
           break;
+        case 'hitResult':
+          return <HitResult result={ this.props.result.hitResult } />;
+          break;
+        case 'taskPool':
+          return <TaskPool taskGroupId={ this.props.result.taskGroupId } />;
+          break;
       }
     };
 
@@ -42,6 +50,7 @@ export default class ResultWindow extends React.Component {
       ],
       'Result': [
         { name: 'hitResult', title: 'HIT Result' },
+        { name: 'taskPool', title: 'Task Pool Monitor' },
       ]
     };
 
