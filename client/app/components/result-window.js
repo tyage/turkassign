@@ -29,7 +29,7 @@ export default class ResultWindow extends React.Component {
           return <Algorithm disabled={ true } />;
           break;
         case 'tasks':
-          return <Tasks />;
+          return <Tasks disabled={ true } />;
           break;
       }
     };
@@ -51,7 +51,7 @@ export default class ResultWindow extends React.Component {
           <div className="pane-group">
             <NavGroups groups={ navGroups } onItemChange={ this.onNavItemChange.bind(this) }
               defaultItem={ defaultActiveNavItem } />
-            <div className="pane">
+            <div className="pane" id="content-pane">
               { showContent() }
             </div>
           </div>

@@ -3,7 +3,7 @@
 .form-section {
   margin: 10px 0;
   label {
-    width: 200px;
+    width: 150px;
     margin: 0 10px 0 0;
     display: inline-block;
     text-align: right;
@@ -11,8 +11,34 @@
   }
 }
 
+#content-pane {
+  padding: 20px 40px;
+}
+
 #config-form {
   input {
     width: 300px;
+  }
+}
+
+#task-forms {
+  #tasks-actions {
+    margin: 0 0 20px;
+  }
+  .task-form {
+    margin: -1px 0 0 0;
+    border: 1px solid #aaa;
+    padding: 10px;
+    header {
+      display: flex;
+      .task-name {
+        flex: 2;
+        text-align: left;
+      }
+      .task-actions {
+        flex: 1;
+        text-align: right;
+      }
+    }
   }
 }

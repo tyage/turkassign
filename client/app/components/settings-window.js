@@ -51,7 +51,7 @@ export default class SettingsWindow extends React.Component {
           <div className="pane-group">
             <NavGroups groups={ navGroups } onItemChange={ this.onNavItemChange.bind(this) }
               defaultItem={ defaultActiveNavItem } />
-            <div className="pane">
+            <div className="pane" id="content-pane">
               { showContent() }
             </div>
           </div>
