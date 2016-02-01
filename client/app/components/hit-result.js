@@ -10,6 +10,7 @@ export default class HitResult extends React.Component {
   render() {
     const $ = this.props.result;
     const hitId = $('HITId').text();
+    // TODO: production mode (not sandbox!!!)
     const hitUrl = `https://workersandbox.mturkcontent.com/dynamic/hit?assignmentId=ASSIGNMENT_ID_NOT_AVAILABLE&hitId=${hitId}`
 
     return (

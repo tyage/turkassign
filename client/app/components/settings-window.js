@@ -2,6 +2,7 @@ import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
 import Tasks from './tasks';
+import HitConfig from './hit-config';
 import NavGroups from './nav-groups';
 
 const defaultActiveNavItem = 'config';
@@ -34,6 +35,9 @@ export default class SettingsWindow extends React.Component {
         case 'tasks':
           return <Tasks />;
           break;
+        case 'hitConfig':
+          return <HitConfig />;
+          break;
       }
     };
 
@@ -42,6 +46,7 @@ export default class SettingsWindow extends React.Component {
         { name: 'config', title: 'Config' },
         { name: 'algorithm', title: 'Algorithm' },
         { name: 'tasks', title: 'Tasks' },
+        { name: 'hitConfig', title: 'HIT Config' },
       ]
     };
 

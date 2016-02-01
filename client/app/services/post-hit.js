@@ -21,13 +21,13 @@ const postHIT = (setting) => {
     fs.writeFileSync(uploadedFile, turkassignBrowser + setting.algorithm);
 
     return mturk.createHIT(taskGroupId, fs.createReadStream(uploadedFile), {
-      'Title': 'Estimate age of the photo',
-      'MaxAssignment': 1,
-      'Description': 'We will show you some photos. You should estimate the age of person who is in the photo.',
-      'AssignmentDurationInSeconds': 30,
-      'LifetimeInSeconds': 3600,
-      'Reward.1.Amount': 0.02,
-      'Reward.1.CurrencyCode': 'USD'
+      'Title': setting.hitTitle,
+      'MaxAssignment': setting.hitMaxAssignment,
+      'Description': setting.hitDescription,
+      'AssignmentDurationInSeconds': setting.hitAssignmentDurationInSeconds,
+      'LifetimeInSeconds': setting.hitLifetimeInSeconds,
+      'Reward.1.Amount': setting.hitRewardAmount,
+      'Reward.1.CurrencyCode': setting.hitRewardCurrencyCode
     }).then(hitResult => {
       return {
         hitResult,

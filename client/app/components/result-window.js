@@ -2,6 +2,7 @@ import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
 import Tasks from './tasks';
+import HitConfig from './hit-config';
 import HitResult from './hit-result';
 import TaskPool from './task-pool';
 import NavGroups from './nav-groups';
@@ -33,6 +34,9 @@ export default class ResultWindow extends React.Component {
         case 'tasks':
           return <Tasks disabled={ true } />;
           break;
+        case 'hitConfig':
+          return <HitConfig disabled={ true } />;
+          break;
         case 'hitResult':
           return <HitResult result={ this.props.result.hitResult } />;
           break;
@@ -47,6 +51,7 @@ export default class ResultWindow extends React.Component {
         { name: 'config', title: 'Config' },
         { name: 'algorithm', title: 'Algorithm' },
         { name: 'tasks', title: 'Tasks' },
+        { name: 'hitConfig', title: 'HIT Config' },
       ],
       'Result': [
         { name: 'hitResult', title: 'HIT Result' },
