@@ -16,14 +16,11 @@ const postHIT = (setting) => {
     const { taskGroupId } = res;
 
     // create stream from text
-    const assignmentProgram = new stream.Readable();
-    assignmentProgram.pipe = (dest) => {
-      dest.write(setting.algorithm);
-      return dest;
-    };
-    assignmentProgram.path = 'algorithm.js';
+    const turkassignBrowser = fs.readFileSync('./node_modules/turkassign-browser/lib/main-packed.js');
+    const uploadedFile = './tmp/upload.js';
+    fs.writeFileSync(uploadedFile, turkassignBrowser + setting.algorithm);
 
-    return mturk.createHIT(taskGroupId, assignmentProgram, {
+    return mturk.createHIT(taskGroupId, fs.createReadStream(uploadedFile), {
       'Title': 'Estimate age of the photo',
       'MaxAssignment': 1,
       'Description': 'We will show you some photos. You should estimate the age of person who is in the photo.',
