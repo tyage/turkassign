@@ -19,7 +19,7 @@
     "gulp-util": "^3.0.7",
     "jquery": "^2.2.0",
     "lodash": "^3.10.1",
-    "turkassign-browser": "file:../browser",
+    "turkassign-browser": "^1.0.0",
     "webpack-stream": "^3.1.0"
   }
 }

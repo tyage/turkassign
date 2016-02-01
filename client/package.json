@@ -10,7 +10,7 @@
     "photon": "git+https://github.com/connors/photon.git",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "turkassign-browser": "file:../browser"
+    "turkassign-browser": "^1.0.0"
   },
   "devDependencies": {
     "electron-compilers": "^2.0.6",
