@@ -2,6 +2,17 @@ import stream from 'stream';
 import { taskPool, MTurk, config } from '../../../requester/src/main';
 import fs from 'fs';
 
+// create a file stream of assignment algorithm
+const getAlgorithmFileStream = (algorithm) => {
+  const uploadedFile = './tmp/upload.js';
+  const turkassignBrowserFile = './node_modules/turkassign-browser/lib/main-packed.js';
+  const turkassignBrowserSource = fs.readFileSync(turkassignBrowserFile);
+
+  fs.writeFileSync(uploadedFile, turkassignBrowserSource + algorithm);
+
+  return fs.createReadStream(uploadedFile);
+};
+
 // post hit with current config
 const postHIT = (setting) => {
   const mturk = new MTurk({
@@ -15,12 +26,8 @@ const postHIT = (setting) => {
   return taskPool.setTasks(setting.tasks).then(res => {
     const { taskGroupId } = res;
 
-    // create stream from text
-    const turkassignBrowser = fs.readFileSync('./node_modules/turkassign-browser/lib/main-packed.js');
-    const uploadedFile = './tmp/upload.js';
-    fs.writeFileSync(uploadedFile, turkassignBrowser + setting.algorithm);
-
-    return mturk.createHIT(taskGroupId, fs.createReadStream(uploadedFile), {
+    const algorithmFile = getAlgorithmFileStream(setting.algorithm);
+    return mturk.createHIT(taskGroupId, algorithmFile, {
       'Title': setting.hitTitle,
       'MaxAssignment': setting.hitMaxAssignment,
       'Description': setting.hitDescription,
