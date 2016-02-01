@@ -6,3 +6,9 @@
     - Tool to use task pool
     - Tool to use microtask platforms such as:
         - Amazon Mechanical Turk
+
+## How to build
+
+```sh
+$ npm run build
+```

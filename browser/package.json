@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/main.js",
   "scripts": {
-    "build": "`npm bin`/babel src --out-dir lib && `npm bin`/gulp",
+    "build": "babel src --out-dir lib && gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

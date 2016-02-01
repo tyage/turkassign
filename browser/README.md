@@ -9,3 +9,9 @@ It provides some functions that communicate to task pool
 - `finishTaskAssginment()`
     - you should call this after you showed the task to worker
     - Some functions that is needed to platform is called
+
+## How to build
+
+```sh
+$ npm run build
+```

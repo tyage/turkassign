@@ -5,3 +5,9 @@
 - This is a web server that roles:
     - Upload files
     - Manage the tasks and its assignments
+
+## Usage
+
+```sh
+$ PORT=XXX npm start
+```
