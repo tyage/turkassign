@@ -65,7 +65,7 @@ export default class ResultWindow extends React.Component {
           <div className="pane-group">
             <NavGroups groups={ navGroups } onItemChange={ this.onNavItemChange.bind(this) }
               defaultItem={ defaultActiveNavItem } />
-            <div className="pane" id="content-pane">
+            <div className="pane content-pane">
               { showContent() }
             </div>
           </div>

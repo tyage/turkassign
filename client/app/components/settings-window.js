@@ -1,6 +1,7 @@
 import React from 'react';
 import Config from './config';
 import Algorithm from './algorithm';
+import AlgorithmTemplates from './algorithm-templates';
 import Tasks from './tasks';
 import HitConfig from './hit-config';
 import NavGroups from './nav-groups';
@@ -32,6 +33,9 @@ export default class SettingsWindow extends React.Component {
         case 'algorithm':
           return <Algorithm />;
           break;
+        case 'algorithmTemplates':
+          return <AlgorithmTemplates />;
+          break;
         case 'tasks':
           return <Tasks />;
           break;
@@ -45,6 +49,7 @@ export default class SettingsWindow extends React.Component {
       'Settings': [
         { name: 'config', title: 'Config' },
         { name: 'algorithm', title: 'Algorithm' },
+        { name: 'algorithmTemplates', title: 'Algorithm Templates' },
         { name: 'tasks', title: 'Tasks' },
         { name: 'hitConfig', title: 'HIT Config' },
       ]
@@ -56,7 +61,7 @@ export default class SettingsWindow extends React.Component {
           <div className="pane-group">
             <NavGroups groups={ navGroups } onItemChange={ this.onNavItemChange.bind(this) }
               defaultItem={ defaultActiveNavItem } />
-            <div className="pane" id="content-pane">
+            <div className="pane content-pane">
               { showContent() }
             </div>
           </div>

@@ -1,8 +1,6 @@
 import React from 'react';
 import ConfigService from '../services/config';
 
-let nextId = 0;
-
 export default class Algorithm extends React.Component {
   constructor(props) {
     super(props);
@@ -10,35 +8,30 @@ export default class Algorithm extends React.Component {
     this.state = {
       tasks: ConfigService.get('tasks') || []
     };
-    this.state.tasks.forEach(task => {
-      if (task.id >= nextId) {
-        nextId = task.id + 1;
-      }
-    });
   }
-  updateTasks() {
+  saveTasks() {
     const tasks = this.state.tasks;
     this.setState({
-      tasks: tasks
+      tasks
     });
     ConfigService.set('tasks', tasks);
   }
-  onTaskChange(i, key, e) {
+  changeTask(i, key, e) {
     this.state.tasks[i][key] = e.target.value;
-    this.updateTasks();
+    this.saveTasks();
   }
-  onDeleteTask(i) {
+  deleteTask(i) {
     this.state.tasks.splice(i, 1);
-    this.updateTasks();
+    this.saveTasks();
   }
-  onAddTask() {
-    ++nextId;
+  addTask() {
+    const maxId = Math.max(0, ...this.state.tasks.map(task => task.id));
     this.state.tasks.push({
       budget: 0,
       content: '',
-      id: nextId
+      id: maxId + 1
     });
-    this.updateTasks();
+    this.saveTasks();
   }
   render() {
     const taskElems = this.state.tasks.map((task, i) => {
@@ -50,7 +43,7 @@ export default class Algorithm extends React.Component {
               !this.props.disabled && (
                 <div className="task-actions">
                   <button className="btn btn-mini btn-negative"
-                    onClick={ this.onDeleteTask.bind(this, i) }>Delete this</button>
+                    onClick={ this.deleteTask.bind(this, i) }>Delete this</button>
                 </div>
               )
             }
@@ -59,14 +52,14 @@ export default class Algorithm extends React.Component {
             <label>Budget</label>
             <input type="number" defaultValue={ task.budget }
               min="0" disabled={ this.props.disabled }
-              onChange={ this.onTaskChange.bind(this, i, 'budget') } />
+              onChange={ this.changeTask.bind(this, i, 'budget') } />
           </div>
           <div className="form-section">
             <label>Content</label>
             <textarea rows="3" cols="80"
               defaultValue={ task.content }
               disabled={ this.props.disabled }
-              onChange={ this.onTaskChange.bind(this, i, 'content') }
+              onChange={ this.changeTask.bind(this, i, 'content') }
               ></textarea>
           </div>
         </section>
@@ -79,7 +72,7 @@ export default class Algorithm extends React.Component {
           !this.props.disabled && (
             <div id="tasks-actions">
               <button className="btn btn-mini btn-primary"
-                onClick={ this.onAddTask.bind(this) }>Add task</button>
+                onClick={ this.addTask.bind(this) }>Add task</button>
             </div>
           )
         }
