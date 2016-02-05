@@ -74,7 +74,7 @@ export default class AlgorithmTemplates extends React.Component {
               { algorithmTemplateElems }
             </ul>
           </div>
-          <div className="pane content-pane">
+          <div className="pane content-pane" id="algorithm-template-form">
             { activeTemplate && (
                 <div>
                   <div className="form-section">
@@ -86,7 +86,7 @@ export default class AlgorithmTemplates extends React.Component {
                       ref="templateTitle" />
                   </div>
                   <div className="form-section">
-                    <label>Assignment Algorithm</label>
+                    <label>Algorithm</label>
                     <textarea rows="30" cols="80"
                       disabled={ this.props.disabled }
                       onChange={ this.changeTemplate.bind(this, activeTemplate, 'content') }
